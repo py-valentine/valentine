@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -371,7 +371,6 @@
                 transform: scale(1) translateY(0);
             }
         }
-
     </style>
 </head>
 <body>
@@ -382,11 +381,11 @@
     <!-- PAGE 0: START -->
     <div id="page0" class="page-container">
         <div class="glass-card">
-            <img src="https://media1.tenor.com/m/SKHC8Ghx0GAAAAAC/peach-goma.gif" alt="Stiker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
-            <h1 class="font-big text-xl mb-2 relative z-10">Ada sesuatu untukmu...</h1>
-            <p class="font-small text-lg mb-8 relative z-10">Klik tombol di bawah untuk memulai pengalaman Valentine-mu</p>
+            <img src="https://media1.tenor.com/m/SKHC8Ghx0GAAAAAC/peach-goma.gif" alt="Sticker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
+            <h1 class="font-big text-xl mb-2 relative z-10">Something for you...</h1>
+            <p class="font-small text-lg mb-8 relative z-10">Click the button below to start your Valentine experience</p>
             <button onclick="initExperience()" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
-                Mulai ✨
+                Start ✨
             </button>
         </div>
     </div>
@@ -394,9 +393,9 @@
     <!-- PAGE 1: LOADING -->
     <div id="page1" class="page-container hidden-page">
         <div class="glass-card">
-            <img src="https://media.tenor.com/VyQdr-kokA0AAAAi/peach-goma.gif" alt="Stiker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
+            <img src="https://media.tenor.com/VyQdr-kokA0AAAAi/peach-goma.gif" alt="Sticker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
             <h1 class="font-big text-2xl mb-1 relative z-10">A Valentine Moment</h1>
-            <p class="font-small text-md mb-8 relative z-10">sedang disiapkan untukmu...</p>
+            <p class="font-small text-md mb-8 relative z-10">is being prepared for you...</p>
             
             <div class="loading-bar-container mb-4">
                 <div id="loader" class="loading-bar-fill"></div>
@@ -411,26 +410,26 @@
     <!-- PAGE 2: WILL YOU BE MY VALENTINE -->
     <div id="page2" class="page-container hidden-page">
         <div class="glass-card">
-            <p class="font-small text-sm mb-2 relative z-10">Hai, aku ada sesuatu yang spesial untukmu</p>
+            <p class="font-small text-sm mb-2 relative z-10">Hi, I have something special for you</p>
             <h2 class="font-big text-2xl mb-6 relative z-10">Will You Be My Valentine?</h2>
             
             <div class="w-full p-4 bg-sky-600 rounded-2xl shadow-xl text-white relative mb-8 z-10">
-                <p class="text-sm italic">"Pengingat kecil tentang betapa berartinya hidupku ketika bersamamu."</p>
+                <p class="text-sm italic">"A little reminder of how much more meaningful my life is with you in it."</p>
             </div>
 
             <div class="h-6 mb-8 relative z-10">
-                <p class="typewriter text-sky-700 font-semibold text-xs">Klik di bawah jika sudah siap✨</p>
+                <p class="typewriter text-sky-700 font-semibold text-xs">Click below when you're ready✨</p>
             </div>
 
             <button onclick="nextPage(3)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
-                Buka Ini!💙
+                Open This!💙
             </button>
         </div>
     </div>
 
     <!-- PAGE 3: VALENTINE NOTE -->
     <div id="page3" class="page-container hidden-page">
-        <p class="font-small text-xl mb-1">Karena hari ini terasa begitu pas</p>
+        <p class="font-small text-xl mb-1">Because today feels just right</p>
         <h2 class="font-big text-3xl mb-6">A Valentine Note💙</h2> 
         
         <div class="w-full max-w-xs p-8 bg-sky-100 rounded-3xl border-4 border-sky-200 relative shadow-xl">
@@ -438,9 +437,9 @@
             
             <div id="envelope-wrapper" class="flex flex-col items-center py-6">
                 <div class="envelope-emoji cursor-pointer hover:scale-110 transition-transform duration-300" onclick="openEnvelope()">📩</div>
-                <p class="text-sky-600 font-bold text-lg mb-3">Klik amplopnya!</p>
+                <p class="text-sky-600 font-bold text-lg mb-3">Click the envelope!</p>
                 <div class="bg-white/50 border-2 border-sky-300 px-6 py-2 rounded-full text-sky-600 font-bold text-sm shadow-sm">
-                    Pesan Spesial 💙
+                    Special Message 💙
                 </div>
             </div>
 
@@ -451,16 +450,16 @@
                 </div>
                 <div class="absolute -bottom-4 -left-4 w-12 h-12">💙</div>
                 <div class="flex flex-col space-y-2 w-full">
-                    <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-sky-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow">Lanjut 🎶</button>
+                    <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-sky-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow">Continue 🎶</button>
                 </div>
             </div>
         </div>
-        <button onclick="nextPage(2)" class="btn-back">Kembali</button>
+        <button onclick="nextPage(2)" class="btn-back">Back</button>
     </div>
 
     <!-- PAGE 4: SONGS -->
     <div id="page4" class="page-container hidden-page">
-        <h2 class="font-big text-2xl mb-6">Lagu yang cocok untuk mengingat kenangan kita</h2>
+        <h2 class="font-big text-2xl mb-6">Songs that remind me of our memories</h2>
         
         <div id="cassette-list" class="w-full max-w-xs mb-8 h-[55vh] overflow-y-auto px-4 pt-4">
             
@@ -494,12 +493,12 @@
                 </div>
             </div>
 
-            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/lihat-kebunku.mp3', this)">
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/give-me.mp3', this)">
                 <div class="cassette">
                     <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
                     <div class="cassette-label">
-                        <p class="font-handwriting font-bold text-sky-800 text-lg leading-tight">Taman Bunga</p>
-                        <p class="font-handwriting text-sky-500 text-sm">Aku Jeje</p>
+                        <p class="font-handwriting font-bold text-sky-800 text-lg leading-tight">Give Me Your Forever</p>
+                        <p class="font-handwriting text-sky-500 text-sm">Jack Tabudlo</p>
                         <div class="cassette-window">
                             <div class="sprocket"></div>
                             <div class="sprocket"></div>
@@ -512,85 +511,85 @@
         </div>
 
         <div class="flex space-x-4">
-            <button onclick="nextPage(3)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
-            <button onclick="nextPage(5)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut 📸</button>
+            <button onclick="nextPage(3)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(5)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 📸</button>
         </div>
     </div>
 
     <!-- PAGE 5: GALLERY -->
     <div id="page5" class="page-container hidden-page">
-        <h2 class="font-big text-3xl mb-4">Kenangan Kita</h2>
+        <h2 class="font-big text-3xl mb-4">Our Memories</h2>
         <div class="photo-grid mb-6">
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Kenangan 1"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Kenangan 2"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Kenangan 3"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Kenangan 4"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Kenangan 5"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Kenangan 6"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Kenangan 7"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Kenangan 8"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Kenangan 9"></div>
-            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Kenangan 10"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Memory 1"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Memory 2"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Memory 3"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Memory 4"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Memory 5"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Memory 6"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Memory 7"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Memory 8"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Memory 9"></div>
+            <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Memory 10"></div>
         </div>
-        <p class="italic text-xs text-sky-500 mb-4 px-10">"Scroll ke bawah untuk melihat semua momen kita."</p>
+        <p class="italic text-xs text-sky-500 mb-4 px-10">"Scroll down to see all our moments."</p>
         <div class="flex space-x-4">
-            <button onclick="nextPage(4)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
-            <button onclick="nextPage(6)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut ✨</button>
+            <button onclick="nextPage(4)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(6)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue ✨</button>
         </div>
     </div>
 
     <!-- PAGE 6: WHY YOU MATTER -->
     <div id="page6" class="page-container hidden-page">
         <h2 class="font-big text-3xl mb-1">WHY YOU MATTER</h2>
-        <p class="font-small text-lg italic mb-10">Sekilas tentang apa yang membuatmu luar biasa</p>
+        <p class="font-small text-lg italic mb-10">A glimpse of what makes you amazing</p>
 
         <div class="w-full max-w-sm space-y-8 mb-10 overflow-y-auto max-h-[50vh] px-6 py-4">
             <div class="reason-card">
                 <div class="reason-icon">💖</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Hati yang Tulus</p>
-                <p class="text-xs text-gray-500 italic">"Kamu peduli dengan cara yang terasa nyata dan tulus."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">Pure Heart</p>
+                <p class="text-xs text-gray-500 italic">"You care in a way that feels real and genuine."</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">🌊</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Kehadiran yang Menenangkan</p>
-                <p class="text-xs text-gray-500 italic">"Bersamamu terasa damai dan menenangkan."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">Calming Presence</p>
+                <p class="text-xs text-gray-500 italic">"Being with you feels peaceful and soothing."</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">✨</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Sifat yang Baik</p>
-                <p class="text-xs text-gray-500 italic">"Kebaikanmu muncul secara alami, tanpa dipaksakan."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">Kind Nature</p>
+                <p class="text-xs text-gray-500 italic">"Your kindness comes naturally, never forced."</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">🛡️</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Dukungan Tanpa Henti</p>
-                <p class="text-xs text-gray-500 italic">"Kamu selalu ada dalam suka maupun duka."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">Endless Support</p>
+                <p class="text-xs text-gray-500 italic">"You are always there through highs and lows."</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">💡</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Jiwa yang Terang</p>
-                <p class="text-xs text-gray-500 italic">"Kamu menyinari setiap sudut gelap dalam hidupku."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">Bright Soul</p>
+                <p class="text-xs text-gray-500 italic">"You light up every dark corner of my life."</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">💃</div>
-                <p class="font-bold text-sky-700 text-lg mb-1">Perempuan Terbaik</p>
-                <p class="text-xs text-gray-500 italic">"Karena kamu bukan sekadar pasangan, kamu adalah rumah bagiku."</p>
+                <p class="font-bold text-sky-700 text-lg mb-1">The Best Woman</p>
+                <p class="text-xs text-gray-500 italic">"Because you're not just a partner, you're my home."</p>
             </div>
         </div>
 
         <div class="flex space-x-4">
-            <button onclick="nextPage(5)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
-            <button onclick="nextPage(7)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut 💌</button>
+            <button onclick="nextPage(5)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(7)" class="bg-sky-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 💌</button>
         </div>
     </div>
 
     <!-- PAGE 7: FINAL PAGE -->
     <div id="page7" class="page-container hidden-page">
-        <h2 class="font-big text-2xl mb-6">Happy Valentine Day Sayangg</h2>
+        <h2 class="font-big text-2xl mb-6">Happy Valentine's Day Darling</h2>
         
         <div id="final-box" class="w-full max-w-xs p-6 bg-sky-50 rounded-2xl border-2 border-sky-200 shadow-xl">
             <h3 class="font-bold text-sky-700 text-sm mb-3">Final Love Letter💌</h3>
@@ -599,26 +598,26 @@
             </div>
 
             <div class="flex justify-between items-center">
-                <button onclick="nextPage(6)" class="text-sky-400 font-bold text-xs hover:underline">kembali</button>
-                <button onclick="sealIt()" class="bg-sky-500 text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Kunci💌</button>
+                <button onclick="nextPage(6)" class="text-sky-400 font-bold text-xs hover:underline">back</button>
+                <button onclick="sealIt()" class="bg-sky-500 text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal It💌</button>
             </div>
         </div>
 
         <div id="seal-loading" class="hidden flex flex-col items-center mt-8">
             <div class="text-4xl animate-bounce">💌</div>
-            <p class="font-big text-xl text-sky-600">Menutup ini dengan lembut</p>
+            <p class="font-big text-xl text-sky-600">Sealing this with love</p>
         </div>
 
         <div id="final-sent" class="hidden w-full max-w-xs p-8 bg-sky-100 rounded-3xl border-4 border-white shadow-2xl flex flex-col items-center">
             <div class="text-5xl mb-4">💙</div>
-            <h2 class="font-big text-3xl text-sky-700 mb-1">Dikirim dengan Kasih</h2>
-            <p class="font-small text-sky-400 text-sm mb-6">Hanya Untukmu</p>
+            <h2 class="font-big text-3xl text-sky-700 mb-1">Sent with Love</h2>
+            <p class="font-small text-sky-400 text-sm mb-6">Only For You</p>
             <div class="flex space-x-1 text-xl mb-6">💙💙💙💙💙💙💙</div>
             <div class="text-center text-sky-800 space-y-1 mb-8">
                 <p class="font-bold text-md">From FazeScript</p>
                 <p id="date-display" class="text-[10px] opacity-70"></p>
             </div>
-            <button onclick="location.reload()" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-2 rounded-full font-bold text-sm">lihat lagi✨</button>
+            <button onclick="location.reload()" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-2 rounded-full font-bold text-sm">see again✨</button>
         </div>
     </div>
 
@@ -714,21 +713,17 @@
         }
 
         function nextPage(n) {
-            // Sembunyikan semua halaman & hapus class animasi lama
             document.querySelectorAll('.page-container').forEach(p => {
                 p.classList.add('hidden-page');
                 p.classList.remove('fade-in-page'); 
             });
 
-            // Tampilkan halaman tujuan
             const targetPage = document.getElementById('page' + n);
             targetPage.classList.remove('hidden-page');
             
-            // Picu ulang animasi
             void targetPage.offsetWidth; 
             targetPage.classList.add('fade-in-page');
 
-            // Cek jika pindah ke Page 7 untuk typewriter
             if (n === 7) {
                 startTypewriterP7();
             }
@@ -738,9 +733,9 @@
             document.getElementById('envelope-wrapper').classList.add('hidden');
             document.getElementById('letter-opened').classList.remove('hidden');
             
-            const txt = "Hai! Aku hanya ingin memberitahumu betapa aku menghargaimu. Kamu adalah bagian terbaik dalam setiap hariku. Selamat Hari Valentine! 💙";
+            const txt = "Hi! I just wanted to let you know how much I appreciate you. You are the best part of every day. Happy Valentine's Day! 💙";
             const target = document.getElementById('type-p3');
-            target.innerHTML = ""; // Clear for re-typing if back button used
+            target.innerHTML = ""; 
             let i = 0;
             
             function type() {
@@ -755,18 +750,16 @@
             setTimeout(type, 500);
         }
 
-        // FUNGSI BARU: Animasi mengetik untuk Page 7
         function startTypewriterP7() {
-            const txt = "Hai, ini bukan sekadar website, tapi tentang seberapa berartinya kamu bagiku. Aku harap ini bisa membuatmu tersenyum. Kamu adalah alasan di balik banyak kebahagiaanku, dan aku sangat bersyukur memilikimu. Terima kasih sudah menjadi orang yang luar biasa. Selamat hari kasih sayang, rumahku.";
+            const txt = "Hi, this is more than just a website—it's about how much you mean to me. I hope this brings a smile to your face. You are the reason behind so much of my happiness, and I am so grateful to have you. Thank you for being such an incredible person. Happy Valentine's Day, my home.";
             const target = document.getElementById('type-p7');
-            target.innerHTML = ""; // Reset isi
+            target.innerHTML = ""; 
             let i = 0;
             
             function type() {
                 if (i < txt.length) {
                     target.innerHTML += txt.charAt(i);
                     i++;
-                    // Scroll otomatis ke bawah saat mengetik agar teks terbaru terlihat
                     target.parentElement.scrollTop = target.parentElement.scrollHeight;
                     setTimeout(type, 40);
                 }
@@ -784,7 +777,7 @@
                 
                 const d = new Date();
                 const opt = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('date-display').innerText = d.toLocaleDateString('id-ID', opt);
+                document.getElementById('date-display').innerText = d.toLocaleDateString('en-US', opt);
             }, 3000);
         }
     </script>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dari Hati🤍</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Quicksand:wght@400;600&family=Caveat:wght@700&display=swap');
+
+        :root {
+            /* Tema Pink Babi & Putih */
+            --bg-color: #ffe4e9; /* Pink babi sangat muda */
+            --accent-light: #ffccd5;
+            --accent-main: #ff8fa3; /* Warna pink babi utama */
+            --accent-dark: #ff4d6d; /* Pink babi tua untuk teks */
+            --text-big: #c9184a;
+            --text-small: #ff758f;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+            background: linear-gradient(135deg, #ffe4e9 0%, #f8d6d6 100%);
+            font-family: 'Quicksand', sans-serif;
+            color: var(--accent-dark);
+        }
+
+        .font-big { font-family: 'Fredoka', sans-serif; font-weight: 700; color: var(--text-big); }
+        .font-small { font-family: 'Caveat', cursive; color: var(--text-big); font-size: 20px; }
+        .font-handwriting { font-family: 'Caveat', cursive; }
+
+        .sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .page-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            z-index: 20;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            border: 4px solid #fff;
+            box-shadow: 0 20px 25px -5px rgba(255, 143, 163, 0.2), 0 10px 10px -5px rgba(255, 143, 163, 0.1);
+            max-width: 350px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; 
+            left: -25%; 
+            width: 150%;
+            height: 230px;
+            background: linear-gradient(to top, #ffccd5, #ffffff);
+            border-radius: 50%;
+            z-index: -1; 
+            opacity: 0.7;
+        }
+
+        .cassette-container {
+            width: 100%;
+            max-width: 280px;
+            height: 170px;
+            perspective: 1000px;
+            margin: 0 auto 20px auto;
+        }
+
+        .cassette {
+            width: 100%;
+            height: 100%;
+            background: #ffb3c1; /* Kaset warna pink babi */
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+            border: 2px solid #ff8fa3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .cassette-container:nth-child(1) .cassette { transform: rotateZ(-3deg); }
+        .cassette-container:nth-child(2) .cassette { transform: rotateZ(2deg); }
+        .cassette-container:nth-child(3) .cassette { transform: rotateZ(-1.5deg); }
+
+        .cassette-container:hover .cassette {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-10px);
+            box-shadow: 0 20px 30px rgba(255, 77, 109, 0.3);
+            z-index: 50;
+        }
+
+        .screw {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff8fa3;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .screw.top-l { top: 8px; left: 8px; }
+        .screw.top-r { top: 8px; right: 8px; }
+        .screw.bot-l { bottom: 8px; left: 8px; }
+        .screw.bot-r { bottom: 8px; right: 8px; }
+
+        .cassette-label {
+            width: 90%;
+            height: 75%;
+            background: #fff;
+            margin-top: 12px;
+            border-radius: 6px;
+            border: 1px solid #ffccd5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            background-image: repeating-linear-gradient(white, white 21px, #ffe4e9 22px); 
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .cassette-window {
+            width: 100px;
+            height: 35px;
+            background: #ff4d6d;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid #ffb3c1;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .sprocket {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            animation: rotate-sprocket 4s linear infinite;
+            animation-play-state: paused;
+        }
+        .playing .sprocket { animation-play-state: running; }
+
+        @keyframes rotate-sprocket {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .sprocket::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px; height: 14px;
+            background: #ff8fa3;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .cassette-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 65%;
+            height: 22px;
+            background: #ffccd5;
+            border-top: 2px solid #ff8fa3;
+            border-left: 2px solid #ff8fa3;
+            border-right: 2px solid #ff8fa3;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .hidden-page {
+            display: none !important;
+        }
+
+        .loading-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--accent-main);
+            position: relative;
+            z-index: 5;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-main);
+            transition: width 0.1s linear;
+        }
+
+        .dot-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-main);
+            animation: dotFlashing 1s infinite alternate;
+        }
+        .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotFlashing {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--accent-dark);
+            width: 0;
+            animation: typing 3s steps(40, end) forwards, blink .75s step-end infinite;
+        }
+
+        #typing-text {
+            white-space: pre-wrap;
+        } 
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-dark); } }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 20px;
+            width: 100%;
+            max-width: 320px;
+            max-height: 55vh;
+            overflow-y: auto;
+            padding: 15px;
+            scroll-behavior: smooth;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            padding-bottom: 25px; 
+            box-shadow: 0 4px 15px rgba(255, 143, 163, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 2px solid #ffe4e9;
+        }
+
+        .photo-card:active {
+            transform: scale(0.95) rotate(-2deg);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .photo-grid::-webkit-scrollbar { width: 4px; }
+        .photo-grid::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 10px; }
+        
+        .envelope-emoji {
+            font-size: 8rem;
+            line-height: 1;
+            display: block;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 10px 15px rgba(255, 77, 109, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .reason-card {
+            background: linear-gradient(to bottom, #ffffff 0%, #ffe4e9 100%);
+            border-radius: 1.5rem;
+            border: 2px solid white;
+            padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+            box-shadow: 0 8px 15px -3px rgba(255, 77, 109, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;  
+            transition: all 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-main);
+            box-shadow: 0 15px 20px -5px rgba(255, 77, 109, 0.2);
+        }
+
+        .reason-icon {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: var(--accent-main);
+            border: 4px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .btn-back {
+            background: white;
+            color: var(--accent-main);
+            border: 2px solid var(--accent-main);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            background: var(--accent-light);
+        }
+
+        .fade-in-page {
+            animation: pageAppear 0.8s ease-out forwards;
+        }
+
+        @keyframes pageAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sakura-canvas" id="sakura"></canvas>
+    <audio id="bg-music" loop></audio>
+
+    <!-- PAGE 0: START -->
+    <div id="page0" class="page-container">
+        <div class="glass-card">
+            <img src="https://media.tenor.com/JBX1JSnqijEAAAAi/piggy.gif" alt="Sticker" class="w-24 h-24 rounded-lg mb-2 relative z-10">
+            <h1 class="font-big text-xl mb-2 relative z-10">Something for you...</h1> 
+            <p class="font-small text-lg mb-8 relative z-10">Klik tombol di bawah untuk memulai pengalaman Valentine-mu</p>
+            <button onclick="initExperience()" class="bg-[#ff8fa3] text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
+                Start ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE 1: LOADING -->
+    <div id="page1" class="page-container hidden-page">
+        <div class="glass-card">
+            <img src="https://media.tenor.com/w-9gO8QRrIAAAAAi/tkthao219-piggy.gif" alt="Sticker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
+            <h1 class="font-big text-2xl mb-1 relative z-10">A Valentine Moment</h1>
+            <p class="font-small text-md mb-8 relative z-10">sedang dipersiapkan untukmu...</p>
+            
+            <div class="loading-bar-container mb-4">
+                <div id="loader" class="loading-bar-fill"></div>
+            </div>
+
+            <div class="dot-loader space-x-2 relative z-10">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: WILL YOU BE MY VALENTINE -->
+    <div id="page2" class="page-container hidden-page">
+        <div class="glass-card">
+            <p class="font-small text-sm mb-2 relative z-10">Hi, I have something special for you</p>
+            <h2 class="font-big text-2xl mb-6 relative z-10">Will You Be My Valentine?</h2>
+            
+            <div class="w-full p-4 bg-[#ff758f] rounded-2xl shadow-xl text-white relative mb-8 z-10">
+                <p class="text-sm italic">"This is just a small celebration from me, this showing how much you mean to me. i have a few little things here for you to always remember this moment."</p>
+            </div>
+
+            <div class="h-6 mb-8 relative z-10">
+                <p class="typewriter text-[#c9184a] font-semibold text-xs">Klik di bawah jika sudah siap✨</p>
+            </div>
+
+            <button onclick="nextPage(3)" class="bg-[#ff8fa3] text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
+                Open This! 🩷
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: VALENTINE NOTE -->
+    <div id="page3" class="page-container hidden-page">
+        <p class="font-small text-xl mb-1">Karena hari ini adalah hari spesial</p>
+        <h2 class="font-big text-3xl mb-6">A Valentine Note 🩷</h2> 
+        
+        <div class="w-full max-w-xs p-8 bg-[#fff5f7] rounded-3xl border-4 border-[#ffe4e9] relative shadow-xl">
+            <img src="https://media.tenor.com/xIg9lIOgCqQAAAAi/tkthao219-bubududu.gif" class="absolute -top-5 -right-5 w-16 h-16" alt="stiker">
+            
+            <div id="envelope-wrapper" class="flex flex-col items-center py-6">
+                <div class="envelope-emoji cursor-pointer hover:scale-110 transition-transform duration-300" onclick="openEnvelope()">📩</div>
+                <p class="text-[#ff758f] font-bold text-lg mb-3">Klik Amplopnya!</p>
+                <div class="bg-white/50 border-2 border-[#ffccd5] px-6 py-2 rounded-full text-[#ff758f] font-bold text-sm shadow-sm">
+                    Special Message 🩷
+                </div>
+            </div>
+
+            <div id="letter-opened" class="hidden flex flex-col items-center">
+                <div class="bg-white p-4 rounded-xl text-left shadow-inner border border-[#ffe4e9] w-full mb-4">
+                    <p id="type-p3" class="font-handwriting text-lg text-[#c9184a] leading-relaxed"></p>
+                    <p class="text-right mt-4 font-bold text-[#ff758f] text-xs italic">Dari Hati</p>
+                </div>
+                <div class="absolute -bottom-4 -left-4 w-12 h-12">🩷</div>
+                <div class="flex flex-col space-y-2 w-full">
+                    <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-[#ff8fa3] text-white px-6 py-2 rounded-full font-bold text-sm shadow">Continue 🎶</button>
+                </div>
+            </div>
+        </div>
+        <button onclick="nextPage(2)" class="btn-back">Back</button>
+    </div>
+
+    <!-- PAGE 4: SONGS -->
+    <div id="page4" class="page-container hidden-page">
+        <h2 class="font-big text-2xl mb-6">Songs that remind me of our memories</h2>
+        
+        <div id="cassette-list" class="w-full max-w-xs mb-8 h-[55vh] overflow-y-auto px-4 pt-4">
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/the-most-beautiful-bruno.mp3', this)">
+                <div class="cassette">
+                    <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                    <div class="cassette-label">
+                        <p class="font-handwriting font-bold text-[#c9184a] text-lg leading-tight">The Most Beautiful Thing</p>
+                        <p class="font-handwriting text-[#ff758f] text-sm">Bruno Major</p>
+                        <div class="cassette-window">
+                            <div class="sprocket"></div>
+                            <div class="sprocket"></div>
+                        </div>
+                    </div>
+                    <div class="cassette-bottom"></div>
+                </div>
+            </div>
+
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/nothing-bruno.mp3', this)">
+                <div class="cassette">
+                    <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                    <div class="cassette-label">
+                        <p class="font-handwriting font-bold text-[#c9184a] text-lg leading-tight">Nothing</p>
+                        <p class="font-handwriting text-[#ff758f] text-sm">Bruno Major</p>
+                        <div class="cassette-window">
+                            <div class="sprocket"></div>
+                            <div class="sprocket"></div>
+                        </div>
+                    </div>
+                    <div class="cassette-bottom"></div>
+                </div>
+            </div>
+
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/beautiful-girl.mp3', this)">
+                <div class="cassette">
+                    <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                    <div class="cassette-label">
+                        <p class="font-handwriting font-bold text-[#c9184a] text-lg leading-tight">Beautiful Girl</p>
+                        <p class="font-handwriting text-[#ff758f] text-sm">Christian Bautista</p>
+                        <div class="cassette-window">
+                            <div class="sprocket"></div>
+                            <div class="sprocket"></div>
+                        </div>
+                    </div>
+                    <div class="cassette-bottom"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex space-x-4">
+            <button onclick="nextPage(3)" class="bg-white text-[#ff8fa3] border-2 border-[#ff8fa3] px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(5)" class="bg-[#ff8fa3] text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 📸</button>
+        </div>
+    </div>
+
+    <!-- PAGE 5: GALLERY -->
+    <div id="page5" class="page-container hidden-page">
+        <h2 class="font-big text-3xl mb-4">Our Memories</h2> 
+        <div class="photo-grid mb-6">
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www1.jpeg" alt="Memory 1"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www2.jpeg" alt="Memory 2"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www3.jpeg" alt="Memory 3"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www4.jpeg" alt="Memory 4"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www5.jpeg" alt="Memory 5"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www6.jpeg" alt="Memory 6"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www7.jpeg" alt="Memory 7"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www8.jpeg" alt="Memory 8"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www9.jpeg" alt="Memory 9"></div>
+            <div class="photo-card"><img src="https://birthdaysx.github.io/Foto/www10.jpeg" alt="Memory 10"></div>
+        </div> 
+        <p class="italic text-xs text-[#ff758f] mb-4 px-10">"Scroll down to see all our memories."</p> 
+        <div class="flex space-x-4">
+            <button onclick="nextPage(4)" class="bg-white text-[#ff8fa3] border-2 border-[#ff8fa3] px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(6)" class="bg-[#ff8fa3] text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue ✨</button>
+        </div>
+    </div>
+
+    <!-- PAGE 6: WHY YOU MATTER -->
+    <div id="page6" class="page-container hidden-page">
+        <h2 class="font-big text-3xl mb-1">WHY YOU MATTER</h2>
+        <p class="font-small text-lg italic mb-10">Sekilas tentang apa yang membuatmu luar biasa</p>
+
+        <div class="w-full max-w-sm space-y-8 mb-10 overflow-y-auto max-h-[50vh] px-6 py-4">
+            <div class="reason-card">
+                <div class="reason-icon">🤍</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">You make me feel safe being myself</p>
+                <p class="text-xs text-gray-500 italic">"With you, I don’t have to pretend to be strong or okay. You accept me as I am, and that means everything to me."</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">🥰</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">You truly try to understand me, not just respond to me</p>
+                <p class="text-xs text-gray-500 italic">"You listen deeply, you ask sincerely, and you make me feel seen and valued."</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">✨</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">You love with a gentle and sincere heart</p>
+                <p class="text-xs text-gray-500 italic">"Even though you’re firm, your heart is soft. Your care is quiet, steady, and real."</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon">🫶</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">You respect me, even when we’re different</p>
+                <p class="text-xs text-gray-500 italic">"You never belittle me or make me feel small instead, you make space for me to grow."</p>
+            </div>
+            <div class="reason-card"> 
+                <div class="reason-icon">🤗</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">You’re smart, funny, and somehow always make my days lighter</p>
+                <p class="text-xs text-gray-500 italic">"Without even trying, you become my comfort and my joy."</p>
+            </div> 
+            <div class="reason-card">
+                <div class="reason-icon">😊</div>
+                <p class="font-bold text-[#c9184a] text-lg mb-1">Your wide smile is one of my favorite things in the world</p>
+                <p class="text-xs text-gray-500 italic">"Because in that smile, I see kindness, warmth, and God’s goodness toward me."</p>
+            </div>
+        </div>
+
+        <div class="flex space-x-4">
+            <button onclick="nextPage(5)" class="bg-white text-[#ff8fa3] border-2 border-[#ff8fa3] px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+            <button onclick="nextPage(7)" class="bg-[#ff8fa3] text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 💌</button>
+        </div>
+    </div>
+
+    <!-- PAGE 7: FINAL PAGE -->
+    <div id="page7" class="page-container hidden-page">
+        <h2 class="font-big text-2xl mb-6">Happy Valentine's Day Sayangg</h2>
+        <div id="final-box" class="w-full max-w-xs p-6 bg-[#fff5f7] rounded-2xl border-2 border-[#ffe4e9] shadow-xl">
+            <h3 class="font-bold text-[#c9184a] text-sm mb-3">Final Love Letter💌</h3>
+            <div class="bg-white p-4 rounded-xl border border-[#ffe4e9] text-left mb-6 h-28 overflow-y-auto">
+                <p id="type-p7" class="text-xs text-gray-700 italic leading-relaxed"></p>
+            </div>
+            <div class="flex justify-between items-center">
+                <button onclick="nextPage(6)" class="text-[#ff758f] font-bold text-xs hover:underline">back</button>
+                <button onclick="sealIt()" class="bg-[#ff8fa3] text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal It💌</button>
+            </div>
+        </div>
+
+        <div id="seal-loading" class="hidden flex flex-col items-center mt-8">
+            <div class="text-4xl animate-bounce">💌</div>
+            <p class="font-big text-xl text-[#ff4d6d]">Sealing this with love</p>
+        </div>
+
+        <div id="final-sent" class="hidden w-full max-w-xs p-8 bg-[#fff5f7] rounded-3xl border-4 border-white shadow-2xl flex flex-col items-center">
+            <div class="text-5xl mb-4">🩷</div>
+            <h2 class="font-big text-3xl text-[#c9184a] mb-1">Sent with Love</h2>
+            <p class="font-small text-[#ff758f] text-sm mb-6">Only For You</p>
+            <div class="flex space-x-1 text-xl mb-6">🩷🩷🩷🩷🩷🩷🩷</div>
+            <div class="text-center text-[#c9184a] space-y-1 mb-8">
+                <p class="font-bold text-md">Dari Hati</p>
+                <p id="date-display" class="text-[10px] opacity-70"></p>
+            </div>
+            <button onclick="location.reload()" class="bg-white text-[#ff8fa3] border-2 border-[#ff8fa3] px-8 py-2 rounded-full font-bold text-sm">see again✨</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('sakura');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Petal {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 5 + 5;
+                this.speed = Math.random() * 1 + 0.5;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = Math.random() * 0.05 - 0.025;
+                this.horizontalSpeed = Math.random() * 1 - 0.5;
+                this.color = `rgba(255, 179, 193, ${0.6 + Math.random() * 0.4})`;
+            }  
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.angle) * 0.5 + this.horizontalSpeed;
+                this.angle += this.spin;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(-this.size, 0);
+                ctx.lineTo(this.size, 0);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) petals.push(new Petal());
+
+        function animateSakura() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateSakura);
+        }
+        animateSakura();
+
+        const audio = document.getElementById('bg-music');
+        const defaultSong = 'https://birthdaysx.github.io/Musik/beautiful-girl.mp3'; 
+
+        function initExperience() { 
+            document.getElementById('page0').classList.add('hidden-page');
+            const p1 = document.getElementById('page1'); p1.classList.remove('hidden-page'); p1.classList.add('fade-in-page');
+            
+            audio.src = defaultSong;
+            audio.play().catch(err => console.log("Audio play failed"));
+
+            const loader = document.getElementById('loader'); 
+            let w = 0;
+            const t = setInterval(() => {
+                if (w >= 100) {
+                    clearInterval(t);
+                    setTimeout(() => nextPage(2), 500);
+                } else {
+                    w += 1;
+                    loader.style.width = w + '%';
+                }
+            }, 30);
+        }
+
+        function playSong(url, element) {
+            document.querySelectorAll('.cassette').forEach(c => c.classList.remove('playing'));
+            element.querySelector('.cassette').classList.add('playing');
+            audio.src = url;
+            audio.play();
+        }
+
+        function nextPage(n) {
+            document.querySelectorAll('.page-container').forEach(p => {
+                p.classList.add('hidden-page');
+                p.classList.remove('fade-in-page'); 
+            });
+
+            const targetPage = document.getElementById('page' + n);
+            targetPage.classList.remove('hidden-page');
+            
+            void targetPage.offsetWidth; 
+            targetPage.classList.add('fade-in-page');
+
+            if (n === 7) {
+                startTypewriterP7();
+            }
+        }
+
+        function openEnvelope() {
+            document.getElementById('envelope-wrapper').classList.add('hidden');
+            document.getElementById('letter-opened').classList.remove('hidden');
+            
+            const txt = "Hi Venti I fought for you for eight months not just because I liked you, but because from the beginning I saw you as someone I wanted to walk with in God’s vision for my life. You were never an accident. You were a prayer, a process, and God’s answer at the right time. Thank you for choosing me too 💞";
+            const target = document.getElementById('type-p3');
+            target.innerHTML = ""; 
+            let i = 0;
+            
+            function type() {
+                if (i < txt.length) {
+                    target.innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                } else {
+                    document.getElementById('btn-p3').classList.remove('hidden');
+                }
+            }
+            setTimeout(type, 500);
+        }
+
+        function startTypewriterP7() {
+            const txt = "Hi Seventien 🩷<br><br>I’m writing this letter intentionally, not just because it’s romantic, but because you truly deserve it. You’ve wanted a letter from me for a long time, and I didn’t want to give you something half-hearted, because you’re not someone who lives or loves halfway.<br><br>I really admire how firm and clear you are. You don’t like things vague, you value understanding, and you’re not afraid to ask for real explanations, and that shows how seriously you take life and relationships. You’re also sensitive, not in a weak way, but in a deeply caring way. You notice things. You feel deeply. And that matters to me more than you know.<br><br>I know you don’t like jokes that put you down, and I want you to know this: I respect you, as a person, as my partner, and as someone God has entrusted into my life. You’re smart, genuinely funny, and your wide smile… somehow it always makes everything feel lighter.<br><br>I thank God for you. Not just because you’re someone I love, but because through you, I’m learning how to love in a more honest, mature, and intentional way. I don’t see you as something small in my life, I see you as part of God’s good work in my story.<br><br>I won’t promise to be perfect, but I promise to keep learning how to love you well, with respect, patience, sincerity, and prayer. Thank you for staying, for trusting me, and for being exactly who you are <br><br>Mi lavim yu, Seventien.";
+            const target = document.getElementById('type-p7');
+            target.innerHTML = ""; 
+            let i = 0;
+            
+            function type() {
+                if (i < txt.length) {
+                    if (txt.slice(i, i + 4) === "<br>") {
+                        target.innerHTML += "<br>";
+                        i += 4;
+                    } else {
+                        target.innerHTML += txt.charAt(i);
+                        i++;
+                    }
+                    const container = target.parentElement;
+                    container.scrollTop = container.scrollHeight;
+                    setTimeout(type, 40);
+                }
+            }
+            setTimeout(type, 800);
+        }
+
+        function sealIt() {
+            document.getElementById('final-box').classList.add('hidden');
+            document.getElementById('seal-loading').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('seal-loading').classList.add('hidden');
+                document.getElementById('final-sent').classList.remove('hidden');
+                
+                const d = new Date();
+                const opt = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('date-display').innerText = d.toLocaleDateString('id-ID', opt);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

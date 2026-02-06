@@ -465,12 +465,12 @@
         
         <div id="cassette-list" class="w-full max-w-xs mb-8 h-[55vh] overflow-y-auto px-4 pt-4">
             
-            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/8-letters.mp3', this)">
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/can-i-be-him.mp3', this)">
                 <div class="cassette">
                     <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
                     <div class="cassette-label">
-                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">8 Letter</p>
-                        <p class="font-handwriting text-red-500 text-sm">Why Don't We</p>
+                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">Can I Be Him</p>
+                        <p class="font-handwriting text-red-500 text-sm">James Arthur</p>
                         <div class="cassette-window">
                             <div class="sprocket"></div>
                             <div class="sprocket"></div>
@@ -480,13 +480,13 @@
                 </div>
             </div>
 
-            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/give-me-your.mp3', this)">
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/wanna-be-yours.mp3', this)">
                 <div class="cassette">
                     <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
                     <div class="cassette-label">
-                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">Give Me Your Forever</p>
-                        <p class="font-handwriting text-red-500 text-sm">Jack Tabudlo</p>
-                        <div class="cassette-window">
+                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">I Wanna Be Yours</p>
+                        <p class="font-handwriting text-red-500 text-sm">artic monkeys</p>
+                        <div class="cassette-window"> 
                             <div class="sprocket"></div>
                             <div class="sprocket"></div>
                         </div>
@@ -495,12 +495,12 @@
                 </div>
             </div>
 
-            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/about-you.mp3', this)">
+            <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/amin-paling-serius.mp3', this)">
                 <div class="cassette">
                     <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
                     <div class="cassette-label">
-                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">About You</p>
-                        <p class="font-handwriting text-red-500 text-sm">The 1975</p>
+                        <p class="font-handwriting font-bold text-red-800 text-lg leading-tight">Amin Paling Serius</p>
+                        <p class="font-handwriting text-red-500 text-sm">Sal Priadi dan Nadin Amizah</p>
                         <div class="cassette-window">
                             <div class="sprocket"></div>
                             <div class="sprocket"></div>
@@ -676,7 +676,7 @@
         animateSakura();
 
         const audio = document.getElementById('bg-music');
-        const defaultSong = 'https://birthdaysx.github.io/Musik/kota-ini.mp3';
+        const defaultSong = 'https://birthdaysx.github.io/Musik/amin-paling-serius.mp3';
 
         function initExperience() {
             document.getElementById('page0').classList.add('hidden-page');
@@ -690,7 +690,7 @@
             const t = setInterval(() => {
                 if (w >= 100) {
                     clearInterval(t);
-                    setTimeout(() => nextPage(2), 500);
+                    setTimeout(() => nextPage(2), 500); 
                 } else {
                     w += 1;
                     loader.style.width = w + '%';

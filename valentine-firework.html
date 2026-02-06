@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <!-- Menambahkan link font Quicksand agar terbaca di canvas -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            /* Menghindari zoom otomatis saat klik cepat di iOS */
+            touch-action: manipulation;
+        }
+
+        /* Canvas sebagai background tetap */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: none;
+        }
+
+        /* Overlay halaman */
+        .page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s;
+        }
+
+        /* Khusus halaman 3 agar bisa di-scroll */
+        #page-3 {
+            position: absolute; /* Ganti fixed ke absolute agar bisa scroll */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Mulai dari atas */
+            align-items: center;
+            padding-bottom: 50px;
+            overflow-y: auto; /* Aktifkan scroll vertikal */
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Halaman 1: Kado */
+        #page-1 {
+            background: radial-gradient(circle, #2a0a0a 0%, #000 100%);
+            z-index: 100;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); text-shadow: 0 0 10px #fff; }
+            to { transform: scale(1.05); text-shadow: 0 0 30px #ff4d6d; }
+        }
+
+        #gift-button {
+            font-size: 100px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            animation: wobble 2s infinite ease-in-out;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.4));
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-20px); }
+        }
+
+        /* Halaman 2: Kembang Api Overlay */
+        #page-2 {
+            pointer-events: auto;
+            /* Pastikan z-index cukup tinggi dan background transparan agar klik tembus */
+            background: transparent;
+        }
+
+        #next-page-btn {
+            position: fixed;
+            bottom: 50px;
+            padding: 15px 30px;
+            background: rgba(255, 77, 109, 0.2);
+            border: 2px solid #ff4d6d;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            font-size: 16px;
+            z-index: 20;
+            transition: all 0.3s;
+            pointer-events: auto;
+            display: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #next-page-btn:hover {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 0 20px #ff4d6d;
+        }
+
+        /* Container Galeri Foto */
+        .photo-gallery {
+            position: relative;
+            width: 100%;
+            height: 600px; /* Area khusus foto */
+            flex-shrink: 0;
+        }
+
+        .photo-item {
+            position: absolute;
+            width: 180px;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            pointer-events: auto;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s, opacity 0.5s, top 0.5s;
+            z-index: 11;
+            opacity: 0;
+            top: 120%; 
+        }
+
+        .photo-item.reveal { opacity: 1; }
+
+        .photo-item:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 50;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Penempatan foto agar tidak menumpuk di area pesan */
+        .photo-1.reveal { top: 5%; left: 5%; transform: rotate(-10deg); }
+        .photo-2.reveal { top: 8%; right: 5%; transform: rotate(8deg); }
+        .photo-3.reveal { top: 35%; left: 8%; transform: rotate(5deg); }
+        .photo-4.reveal { top: 40%; right: 10%; transform: rotate(-12deg); }
+        .photo-5.reveal { top: 65%; left: 30%; transform: rotate(-5deg); }
+
+        @media (max-width: 768px) {
+            .photo-gallery { height: 500px; }
+            .photo-item { width: 130px; }
+            .photo-item img { height: 130px; }
+            /* Penyesuaian mobile agar tidak keluar layar */
+            .photo-1.reveal { top: 5%; left: 5%; }
+            .photo-2.reveal { top: 5%; right: 5%; }
+            .photo-3.reveal { top: 35%; left: 5%; }
+            .photo-4.reveal { top: 35%; right: 5%; }
+            .photo-5.reveal { top: 65%; left: 35%; transform: rotate(5deg); }
+        }
+
+        .message-card {
+            position: relative;
+            z-index: 60;
+            max-width: 450px;
+            width: 85%;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 20px; /* Jarak dari galeri */
+        }
+
+        .message-card.reveal {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .message-card h2 { color: #ff4d6d; margin-bottom: 15px; font-size: 1.8rem; }
+        .message-card p { font-size: 1.05rem; line-height: 1.6; color: #fff; }
+        .restart-btn { margin-top: 25px; background: transparent; color: rgba(255,255,255,0.6); border: none; text-decoration: underline; cursor: pointer; }
+
+        /* Gaya untuk efek kursor mengetik */
+        #typing-text::after {
+            content: '❤️';
+            animation: blink 0.7s infinite;
+            color: #ff4d6d;
+            margin-left: 2px;
+            
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Hint Scroll untuk HP */
+        .scroll-hint {
+            color: rgba(255, 77, 109, 0.7);
+            font-size: 14px;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+            display: none;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+    <!-- SONG -->
+    <audio id="birthday-music" loop preload="auto">
+        <source src="https://luzairx.github.io/Music/athousand-years.mp3" type="audio/mpeg">
+    </audio>
+
+    <canvas id="canvas"></canvas>
+
+    <div id="page-1" class="page">
+        <h1>Happy Valentine!</h1>
+        <button id="gift-button" aria-label="Buka Surat">💌</button>
+        <p style="color: #ff4d6d; margin-top: 30px; letter-spacing: 1px;">Klik surat untuk kejutan</p>
+    </div>
+
+    <div id="page-2" class="page hidden">
+        <div style="position: fixed; top: 20px; color: rgba(255,255,255,0.7); letter-spacing: 2px; font-size: 14px; animation: pulse 1s infinite alternate; pointer-events: none;">
+            ✨ Klik layar untuk Love Notes ✨
+        </div>
+        <button id="next-page-btn">Lihat Pesan Sayang ✨</button>
+    </div>
+
+    <!-- FOTO -->
+    <div id="page-3" class="page hidden">
+        <div class="photo-gallery">
+            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Momen 1"></div>
+            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Momen 2"></div>
+            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Momen 3"></div>
+            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Momen 4"></div>
+            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Momen 5"></div>
+        </div>
+
+        <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya sayangg.. 👇</div>
+
+    <!-- NAMA YG ULTAH -->
+        <div class="message-card" id="message-card">
+            <h2>Happy Valentine (Nama Kamu)</h2>
+            <!-- Teks dikosongkan untuk diisi animasi mengetik -->
+            <p id="typing-text"></p>
+    <!-- PENGIRIM -->
+            <p style="font-style: italic; margin-top: 15px;">— from ur pretty girlfriend 🧸</p>
+            <button class="restart-btn" onclick="location.reload()">Mulai Lagi</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const page1 = document.getElementById('page-1');
+        const page2 = document.getElementById('page-2');
+        const page3 = document.getElementById('page-3');
+        const giftButton = document.getElementById('gift-button');
+        const nextPageBtn = document.getElementById('next-page-btn');
+        const messageCard = document.getElementById('message-card');
+        const photoItems = document.querySelectorAll('.photo-item');
+        const scrollHint = document.getElementById('scroll-hint');
+
+        let width, height;
+        let particles = [];
+        let lasers = [];
+        let isStarted = false;
+        let cinematicDone = false;
+
+        // MESSAGE CARD
+        const messageToType = "Happy Valentine's day, sayang 💐 makasih ya udah jadi bagian paling indah di hidup aku🤍 maacii udah selalu sabar, sayang, dan tulus nemenin aku setiap harinya. selamat hari kasih sayang untuk orang yang paling aku sayang, cintaku. aku bersyukur banget bisa ngerayain hari ini sama kamu🥹💗 harapan akuu di hari valentine ini, semoga hubungan kita makin kuat, makin sayang, dan bahagia terus bareng-bareng 🤍 happy valentine, sayangg💐 aku akan selalu ada buat sayang, i love you so much today and forever 💗💗";
+
+        // DAFTAR UCAPAN (WISHES)
+        const wishes = ["I Love You","Happy Valentine", "Cinta Kamu Selalu", "Bahagia Terus", "My Forever Valentine", "Sayang Kamu", "Love You Always"];
+        let wishIndex = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const random = (min, max) => Math.random() * (max - min) + min;
+
+        class SharpParticle {
+            constructor(x, y, color, isBig = false, targetX = null, targetY = null) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = isBig ? random(8, 25) : random(2, 6);
+                this.velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
+                
+                this.friction = 0.94;
+                this.gravity = (targetX !== null) ? 0 : 0.025;
+                this.opacity = 1;
+                // Wishes dibuat awet (0.002) agar tidak cepat hilang
+                this.decay = (targetX !== null) ? 0.002 : (isBig ? random(0.0015, 0.012) : random(0.015, 0.03));
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - (this.velocity.x * 3), this.y - (this.velocity.y * 3));
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+                ctx.restore();
+            }
+            update() {
+                if(this.targetX !== null) {
+                    this.x += (this.targetX - this.x) * 0.1;
+                    this.y += (this.targetY - this.y) * 0.1;
+                    this.velocity.x *= 0.9;
+                    this.velocity.y *= 0.9;
+                } else {
+                    this.velocity.x *= this.friction;
+                    this.velocity.y *= this.friction;
+                    this.velocity.y += this.gravity;
+                    this.x += this.velocity.x;
+                    this.y += this.velocity.y;
+                }
+                this.opacity -= this.decay;
+            }
+        }
+
+        class Laser {
+            constructor(targetX, targetY, isCinematic = false) {
+                this.x = width / 2; 
+                this.y = height;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                this.isCinematic = isCinematic;
+                const angle = Math.atan2(targetY - this.y, targetX - this.x);
+                this.speed = isCinematic ? 0.01 : 2.5;             
+                this.acceleration = isCinematic ? 1.018 : 1.1;      
+                this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
+                this.hue = isCinematic ? 340 : random(0, 360); // 340 warna pink-ish
+                this.color = isCinematic ? '#ff4d6d' : `hsl(${this.hue}, 100%, 70%)`;
+            }
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.velocityUnit.x * this.speed * 4, this.y - this.velocityUnit.y * this.speed * 4);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = this.isCinematic ? 3 : 1;
+                ctx.stroke();
+                ctx.restore();
+            }
+            update() {
+                this.speed *= this.acceleration;
+                this.x += this.velocityUnit.x * this.speed;
+                this.y += this.velocityUnit.y * this.speed;
+                if (this.y <= this.targetY) {
+                    this.explode();
+                    return false;
+                }
+                return true;
+            }
+            explode() {
+                if (this.isCinematic) {
+                    for (let i = 0; i < 280; i++) {
+                        particles.push(new SharpParticle(this.x, this.y, `#ff4d6d`, true));
+                    }
+                    // Mengubah parameter menjadi array untuk handle 2 baris
+                    setTimeout(() => createTextParticles(["I LOVE", "YOU"], this.x, this.y, "#ffffff"), 1);
+                    cinematicDone = true;
+                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);
+                } else {
+                    for (let i = 0; i < 50; i++) {
+                        particles.push(new SharpParticle(this.x, this.y, this.color));
+                    }
+                }
+            }
+        }
+
+        function createTextParticles(text, centerX, centerY, color) {
+            const tempCanvas = document.createElement('canvas');
+            const tCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = 600;
+            tempCanvas.height = 200; // Tinggi diperbesar untuk 2 baris
+            
+            tCtx.fillStyle = 'red'; 
+            tCtx.font = "bold 50px 'Quicksand', sans-serif";
+            tCtx.textAlign = 'center';
+            tCtx.textBaseline = 'middle';
+
+            // Logika untuk merender teks (mendukung string tunggal atau array untuk 2 baris)
+            if (Array.isArray(text)) {
+                tCtx.fillText(text[0], 300, 60);
+                tCtx.fillText(text[1], 300, 120);
+            } else {
+                tCtx.fillText(text, 300, 100);
+            }
+            
+            const data = tCtx.getImageData(0, 0, 600, 200).data;
+            for (let y = 0; y < 200; y += 4) {
+                for (let x = 0; x < 600; x += 4) {
+                    if (data[(y * 600 + x) * 4 + 3] > 128) {
+                        const tx = centerX + (x - 300);
+                        const ty = centerY + (y - 100);
+                        particles.push(new SharpParticle(centerX, centerY, color, true, tx, ty));
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            if (!isStarted) return;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            lasers = lasers.filter(l => {
+                l.draw();
+                return l.update();
+            });
+
+            particles = particles.filter(p => {
+                p.draw();
+                p.update();
+                return p.opacity > 0;
+            });
+
+            if (cinematicDone && lasers.length === 0) {
+                lasers.push(new Laser(random(width * 0.1, width * 0.9), random(height * 0.1, height * 0.4)));
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Fungsi Animasi Mengetik
+        function typeWriter(text, elementId, speed) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            element.innerHTML = ""; // Pastikan kosong
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Hilangkan kursor setelah selesai mengetik (opsional)
+                    // element.style.borderRight = "none";
+                }
+            }
+            type();
+        }
+
+        giftButton.addEventListener('click', () => {
+            const music = document.getElementById('birthday-music');
+            music.play().catch(error => console.log("Musik diblokir browser:", error));
+            page1.classList.add('hidden');
+            canvas.style.display = 'block';
+            page2.classList.remove('hidden');
+            isStarted = true;
+            setTimeout(() => {
+                lasers.push(new Laser(width / 2, height * 0.25, true));
+                animate();
+            }, 500);
+        });
+
+        // PERBAIKAN UNTUK iOS: Menggunakan pointerdown agar kompatibel dengan touch dan mouse
+        window.addEventListener('pointerdown', (e) => {
+            if (cinematicDone && isStarted && e.target.id !== 'next-page-btn') {
+                const text = wishes[wishIndex];
+                const randomColor = `hsl(${Math.random() * 20 + 340}, 100%, 75%)`; // Warna pink/merah
+                
+                const clickX = e.clientX;
+                const clickY = e.clientY;
+                
+                createTextParticles(text, clickX, clickY, randomColor);
+                wishIndex = (wishIndex + 1) % wishes.length;
+            }
+        }, { passive: true });
+
+        nextPageBtn.onclick = (e) => {
+            e.stopPropagation(); 
+            page2.classList.add('hidden');
+            page3.classList.remove('hidden');
+            document.body.style.overflowY = "auto";
+            
+            photoItems.forEach((item, i) => {
+                setTimeout(() => item.classList.add('reveal'), i * 300);
+            });
+
+            setTimeout(() => {
+                messageCard.classList.add('reveal');
+                if(window.innerWidth < 768) scrollHint.style.display = 'block';
+                
+                // Jalankan animasi mengetik setelah kartu pesan muncul
+                setTimeout(() => {
+                    typeWriter(messageToType, "typing-text", 50);
+                }, 800);
+            }, 1800);
+        };
+    </script>
+</body>
+</html>

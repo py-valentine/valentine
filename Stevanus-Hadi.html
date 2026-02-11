@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stevanus Hadi</title>
+    
+    <!-- Dependencies Index 2 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Font Index 2 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Quicksand:wght@400;600&family=Caveat:wght@700&display=swap');
+    </style>
+
+    <style>
+        /* GLOBAL RESET & HELPER */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transition: background-color 1s ease;
+        }
+
+        /* ============================
+           TRANSITION CURTAIN
+           ============================ */
+        #transition-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #fce7f3; /* Pink background for transition */
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #transition-curtain .heart-loader {
+            font-size: 5rem;
+            animation: heartBeat 1s infinite;
+            display: none; 
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* ============================
+           STYLE DARI INDEX 1 (MATRIX - PINK THEME)
+           ============================ */
+        #section-index1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            font-family: 'Courier New', Courier, monospace;
+            z-index: 1000; 
+            transition: opacity 1s ease;
+        }
+
+        #matrixCanvas {
+            display: block;
+        }
+
+        #mContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #mOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #4e4e4e 0%, #070a0a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #mStartBtn {
+            padding: 20px 50px;
+            font-size: 24px;
+            background: #db2777; /* PINK 600 */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(219, 39, 119, 0.4);
+            animation: mPulse 1.5s infinite;
+        }
+
+        @keyframes mPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 20px rgba(219, 39, 119, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 30px rgba(219, 39, 119, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 10px 20px rgba(219, 39, 119, 0.4); }
+        }
+
+        #mStartBtn:hover {
+            background: #be185d; /* PINK 700 */
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .mHint {
+            color: #fbcfe8; /* Light Pink */
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .mDecor {
+            position: absolute;
+            font-size: 30px;
+            animation: mFloat 3s infinite ease-in-out;
+        }
+
+        @keyframes mFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Tombol Transisi Baru (PINK) */
+        #transitionBtn {
+            position: fixed;
+            bottom: 10%;                 /* Jarak dari bawah */
+            left: 50%;                   /* Posisi tengah */
+            transform: translateX(-50%); /* Geser agar pas tengah */
+            padding: 15px 40px;
+            font-size: 20px;
+            background: #ec4899;  /* Pink-500 */
+            color: white;
+            border: none; 
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+            z-index: 500;
+            display: none; 
+            animation: mPulse 2s infinite;
+            transition: transform 0.3s;
+        }
+        #transitionBtn:hover { 
+            transform: translateX(-50%) scale(1.1);
+            background: #db2777; /* Pink-600 */
+        }
+
+        /* ============================
+           STYLE DARI INDEX 2 (BIRTHDAY - PINK THEME)
+           ============================ */
+        #section-index2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none; /* Hidden initially */
+            z-index: 500;
+            
+            /* Updated Color Palette: Pink & White */
+            --bg-color: #fce7f3; /* pink-100 */
+            --accent-light: #fdf2f8; /* pink-50 */
+            --accent-main: #ec4899; /* pink-500 */
+            --accent-dark: #be185d; /* pink-700 */
+            --text-big: #9d174d; /* pink-800 */
+            --text-small: #db2777; /* pink-600 */
+            --card-bg: rgba(255, 255, 255, 0.95);
+            
+            background-color: var(--bg-color);
+            font-family: 'Quicksand', sans-serif;
+            color: var(--accent-dark);
+        }
+
+        /* STYLE STICKER BACKGROUND BARU */
+        .bg-sticker {
+            position: absolute;
+            width: 80px; /* Ukuran default */
+            height: auto;
+            z-index: 5; /* Di bawah kartu utama (20) tapi di atas background */
+            opacity: 0.6; /* Sedikit transparan agar tidak mengganggu */
+            pointer-events: none; /* Agar tidak bisa diklik */
+            animation: floatSticker 6s ease-in-out infinite;
+        }
+
+        /* Animasi mengambang untuk stiker */
+        @keyframes floatSticker {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .font-big { font-family: 'Fredoka', sans-serif; font-weight: 700; color: var(--text-big); }
+        .font-small { font-family: 'Caveat', cursive; color: var(--text-small); font-size: 20px; }
+        .font-handwriting { font-family: 'Caveat', cursive; }
+
+        .sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .page-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            z-index: 20;
+            justify-content: center;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            padding: 2.5rem;
+            border-radius: 2rem;
+            border: 4px solid white;
+            box-shadow: 0 20px 25px -5px rgba(236, 72, 153, 0.15), 0 10px 10px -5px rgba(236, 72, 153, 0.04); /* Pinkish shadow */
+            max-width: 350px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px; 
+            left: -25%; 
+            width: 150%;
+            height: 230px;
+            background: linear-gradient(to top, #ec4899, #fce7f3); /* Pink gradient */
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .cassette-container {
+            width: 100%;
+            max-width: 280px;
+            height: 170px;
+            perspective: 1000px;
+            margin: 0 auto 20px auto;
+        }
+
+        .cassette {
+            width: 100%;
+            height: 100%;
+            background: #1e293b; 
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 2px solid #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .cassette-container:nth-child(1) .cassette { transform: rotateZ(-3deg); }
+        .cassette-container:nth-child(2) .cassette { transform: rotateZ(2deg); }
+        .cassette-container:nth-child(3) .cassette { transform: rotateZ(-1.5deg); }
+
+        .cassette-container:hover .cassette {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+            z-index: 50;
+        }
+
+        .screw {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #475569;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .screw.top-l { top: 8px; left: 8px; }
+        .screw.top-r { top: 8px; right: 8px; }
+        .screw.bot-l { bottom: 8px; left: 8px; }
+        .screw.bot-r { bottom: 8px; right: 8px; }
+
+        .cassette-label {
+            width: 90%;
+            height: 75%;
+            background: #fdf2f8; /* Light Pink */
+            margin-top: 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            background-image: repeating-linear-gradient(white, white 21px, #fce7f3 22px); 
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .cassette-window {
+            width: 100px;
+            height: 35px;
+            background: #0f172a;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid #334155;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .sprocket {
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            animation: rotate-sprocket 4s linear infinite;
+            animation-play-state: paused;
+        }
+        .playing .sprocket { animation-play-state: running; }
+
+        @keyframes rotate-sprocket {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .sprocket::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px; height: 14px;
+            background: #0f172a;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .cassette-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 65%;
+            height: 22px;
+            background: #1e293b;
+            border-top: 2px solid #0f172a;
+            border-left: 2px solid #0f172a;
+            border-right: 2px solid #0f172a;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .hidden-page {
+            display: none !important;
+        }
+
+        .loading-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #fce7f3; /* Pink 100 */
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--accent-main);
+            position: relative;
+            z-index: 5;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-main);
+            transition: width 0.1s linear;
+        }
+
+        .dot-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-main);
+            animation: dotFlashing 1s infinite alternate;
+        }
+        .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotFlashing {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--accent-dark);
+            width: 0;
+            animation: typing 3s steps(40, end) forwards, blink .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-dark); } }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 20px;
+            width: 100%;
+            max-width: 320px;
+            max-height: 55vh;
+            overflow-y: auto;
+            padding: 15px;
+            scroll-behavior: smooth;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            padding-bottom: 25px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: 1px solid #e2e8f0;
+        }
+
+        .photo-card:active {
+            transform: scale(0.95) rotate(-2deg);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .photo-grid::-webkit-scrollbar { width: 4px; }
+        .photo-grid::-webkit-scrollbar-thumb { background: var(--accent-main); border-radius: 10px; }
+        
+        .envelope-emoji {
+            font-size: 8rem;
+            line-height: 1;
+            display: block;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 10px 15px rgba(236, 72, 153, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .reason-card {
+            background: linear-gradient(to bottom, #ffffff 0%, #fbcfe8 100%); /* Pink gradient */
+            border-radius: 1.5rem;
+            padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+            box-shadow: 0 8px 15px -3px rgba(236, 72, 153, 0.1), 0 4px 6px -2px rgba(236, 72, 153, 0.05);
+            border: 2px solid white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;  
+            transition: all 0.3s ease;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-main);
+            box-shadow: 0 15px 20px -5px rgba(236, 72, 153, 0.2);
+        }
+
+        .reason-icon {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: var(--accent-main);
+            border: 4px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .btn-back {
+            background: white;
+            color: var(--accent-main);
+            border: 2px solid var(--accent-main);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            background: var(--accent-light);
+        }
+
+        .fade-in-page {
+            animation: pageAppear 0.8s ease-out forwards;
+        }
+
+        @keyframes pageAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SINGLE GLOBAL AUDIO ELEMENT (Fly Me To The Moon) -->
+    <audio id="bg-music" loop>
+        <source src="https://birthdaysx.github.io/Musik/fly-moon.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TRANSITION CURTAIN -->
+    <div id="transition-curtain">
+        <div class="heart-loader">🩷</div>
+    </div>
+
+    <!-- =============================
+         SECTION 1: MATRIX (INDEX1) - PINK THEME
+         ============================= -->
+    <div id="section-index1">
+        <div id="mOverlay">
+            <div class="mDecor" style="top: 20%; left: 20%;">❤️</div>
+            <div class="mDecor" style="top: 70%; left: 80%; animation-delay: 1s;">✨</div>
+            <div class="mDecor" style="top: 30%; left: 75%; animation-delay: 0.5s;">🌹</div>
+            <div class="mDecor" style="top: 80%; left: 15%; animation-delay: 1.5s;">🧸</div>
+
+            <button id="mStartBtn">Click for Surprise ✨</button>
+            <p class="mHint">❤️</p>
+        </div>
+
+        <div id="mContainer">
+            <canvas id="matrixCanvas"></canvas>
+            <button id="transitionBtn" onclick="goToSection2()">Open My Heart 🩷</button>
+        </div>
+    </div> 
+
+    <!-- =============================
+         SECTION 2: VALENTINE (INDEX2) - PINK THEME
+         ============================= -->
+    <div id="section-index2">
+        <canvas class="sakura-canvas" id="sakura"></canvas>
+
+        <!-- BACKGROUND STICKERS (Hiasan) -->
+        <img src="https://birthdaysx.github.io/Foto2/st8.png" class="bg-sticker" style="top: 5%; left: 5%; animation-delay: 0s;">
+        <img src="https://birthdaysx.github.io/Foto2/st3.png" class="bg-sticker" style="top: 5%; right: 5%; animation-delay: 1s;">
+        <img src="https://birthdaysx.github.io/Foto2/st21.png" class="bg-sticker" style="bottom: 5%; left: 5%; animation-delay: 2s;">
+        <img src="https://birthdaysx.github.io/Foto2/st22.png" class="bg-sticker" style="bottom: 5%; right: 5%; animation-delay: 0.5s;">
+        <img src="https://birthdaysx.github.io/Foto2/st23.png" class="bg-sticker" style="bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 1.5s;">
+
+         
+        <!-- PAGE 0: START --> 
+        <div id="page0" class="page-container">
+            <div class="glass-card">
+                <img src="https://birthdaysx.github.io/Foto2/st1.png" alt="Sticker" class="w- h-32 rounded-lg mb- relative z-10">
+                <h1 class="font-big text-xl mb-2 relative z-10">Something for you...</h1>
+                <p class="font-small text-lg mb-8 relative z-10">Click the button below to start your happiness</p>
+                <!-- PINK THEME BUTTON -->
+                <button onclick="initExperience()" class="bg-pink-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
+                    Start ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- PAGE 1: LOADING -->
+        <div id="page1" class="page-container hidden-page">
+            <div class="glass-card">
+                <img src="https://birthdaysx.github.io/Foto2/st12.png" alt="Sticker" class="w- h-32 rounded-lg mb- relative z-10">
+                <h1 class="font-big text-2xl mb-1 relative z-10">A Special Gift Moment</h1> 
+                <p class="font-small text-md mb-8 relative z-10">is being prepared for you...</p> 
+                
+                <div class="loading-bar-container mb-4">
+                    <div id="loader" class="loading-bar-fill"></div>
+                </div>
+
+                <div class="dot-loader space-x-2 relative z-10">
+                    <span></span><span></span><span></span>
+                </div> 
+            </div>
+        </div>
+
+        <!-- PAGE 2: WILL YOU BE MY VALENTINE -->
+        <div id="page2" class="page-container hidden-page">
+            <div class="glass-card">
+                <p class="font-small text-sm mb-2 relative z-10">Hi, I have something special for you</p>
+                <h2 class="font-big text-2xl mb-6 relative z-10">Special Gift!</h2>
+                
+                <!-- PINK THEME BOX -->
+                <div class="w-full p-4 bg-pink-500 rounded-2xl shadow-xl text-white relative mb-8 z-10">
+                    <p class="text-sm italic">"A little reminder of how much more meaningful my life is with you in it."</p>
+                </div>
+
+                <div class="h-6 mb-8 relative z-10">
+                    <p class="typewriter text-pink-700 font-semibold text-xs">Click below when you're ready✨</p>
+                </div>
+
+                <button onclick="nextPage(3)" class="bg-pink-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
+                    Open This!🩷
+                </button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: VALENTINE NOTE --> 
+        <div id="page3" class="page-container hidden-page">
+            <p class="font-small text-xl mb-1">Because today feels just right</p>
+            <h2 class="font-big text-3xl mb-6">A Special Note💙</h2> 
+            
+            <div class="w-full max-w-xs p-8 bg-pink-50 rounded-3xl border-4 border-pink-200 relative shadow-xl">
+                <img src="https://birthdaysx.github.io/Foto2/st9.png" class="absolute -top-5 -right-5 w- h-16" alt="stiker">
+                
+                <div id="envelope-wrapper" class="flex flex-col items-center py-6">
+                    <div class="envelope-emoji cursor-pointer hover:scale-110 transition-transform duration-300" onclick="openEnvelope()">📩</div>
+                    <p class="text-pink-600 font-bold text-lg mb-3">Click the envelope!</p>
+                    <div class="bg-white/50 border-2 border-pink-300 px-6 py-2 rounded-full text-pink-600 font-bold text-sm shadow-sm">
+                        Special Message 🩷
+                    </div>
+                </div>
+
+                <div id="letter-opened" class="hidden flex flex-col items-center">
+                    <div class="bg-white p-4 rounded-xl text-left shadow-inner border border-pink-100 w-full mb-4">
+                        <p id="type-p3" class="font-handwriting text-lg text-pink-800 leading-relaxed"></p>
+                        <p class="text-right mt-4 font-bold text-pink-500 text-xs italic">Sayangku cintaku duniaku</p>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 w-12 h-12">🩷</div> 
+                    <div class="flex flex-col space-y-2 w-full">
+                        <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-pink-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow">Continue 🎶</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="nextPage(2)" class="btn-back">Back</button>
+        </div>
+
+        <!-- PAGE 4: SONGS -->
+        <div id="page4" class="page-container hidden-page">
+            <h2 class="font-big text-2xl mb-6">Songs that remind me of our memories</h2>
+            
+            <div id="cassette-list" class="w-full max-w-xs mb-8 h-[55vh] overflow-y-auto px-4 pt-4">
+                
+                <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/blue.mp3', this)">
+                    <div class="cassette">
+                        <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                        <div class="cassette-label">
+                            <p class="font-handwriting font-bold text-pink-800 text-lg leading-tight">Blue</p>
+                            <p class="font-handwriting text-pink-500 text-sm">Yungkai</p>
+                            <div class="cassette-window">
+                                <div class="sprocket"></div>
+                                <div class="sprocket"></div>
+                            </div>
+                        </div>
+                        <div class="cassette-bottom"></div>
+                    </div>
+                </div>
+
+                <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/fly-moon.mp3', this)">
+                    <div class="cassette">
+                        <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                        <div class="cassette-label">
+                            <p class="font-handwriting font-bold text-pink-800 text-lg leading-tight">Fly Me To The Moon</p>
+                            <p class="font-handwriting text-pink-500 text-sm">The Macarons Project</p>
+                            <div class="cassette-window">
+                                <div class="sprocket"></div>
+                                <div class="sprocket"></div>
+                            </div>
+                        </div>
+                        <div class="cassette-bottom"></div>
+                    </div> 
+                </div>
+
+                <div class="cassette-container" onclick="playSong('https://birthdaysx.github.io/Musik/give-me-your.mp3', this)">
+                    <div class="cassette">
+                        <div class="screw top-l"></div><div class="screw top-r"></div><div class="screw bot-l"></div><div class="screw bot-r"></div>
+                        <div class="cassette-label">
+                            <p class="font-handwriting font-bold text-pink-800 text-lg leading-tight">Give Me Your Forever</p>
+                            <p class="font-handwriting text-pink-500 text-sm">Jack Tabudlo</p>
+                            <div class="cassette-window">
+                                <div class="sprocket"></div>
+                                <div class="sprocket"></div>
+                            </div>
+                        </div>
+                        <div class="cassette-bottom"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex space-x-4">
+                <button onclick="nextPage(3)" class="bg-white text-pink-500 border-2 border-pink-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+                <button onclick="nextPage(5)" class="bg-pink-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 📸</button>
+            </div>
+        </div>
+
+        <!-- PAGE 5: GALLERY --> 
+        <div id="page5" class="page-container hidden-page">
+            <h2 class="font-big text-3xl mb-4">Our Memories</h2> 
+            <div class="photo-grid mb-6">
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr1.jpeg" alt="Memory 1"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr2.jpeg" alt="Memory 2"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr3.jpeg" alt="Memory 3"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr4.jpeg" alt="Memory 4"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr5.jpeg" alt="Memory 5"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr6.jpeg" alt="Memory 6"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr7.jpeg" alt="Memory 7"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr8.jpeg" alt="Memory 8"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr9.jpeg" alt="Memory 9"></div>
+            </div> 
+            <p class="italic text-xs text-pink-500 mb-4 px-10">"Scroll down to see all our moments."</p>
+            <div class="flex space-x-4">
+                <button onclick="nextPage(4)" class="bg-white text-pink-500 border-2 border-pink-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+                <button onclick="nextPage(6)" class="bg-pink-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue ✨</button> 
+            </div>
+        </div>
+
+        <!-- PAGE 6: WHY YOU MATTER -->
+        <div id="page6" class="page-container hidden-page">
+            <h2 class="font-big text-3xl mb-1">WHY YOU MATTER</h2>
+            <p class="font-small text-lg italic mb-10">A glimpse of what makes you amazing</p>
+
+            <div class="w-full max-w-sm space-y-8 mb-10 overflow-y-auto max-h-[50vh] px-6 py-4">
+                <div class="reason-card">
+                    <div class="reason-icon">🥰</div>
+                    <p class="font-bold text-pink-700 text-lg mb-1">Menyenangkan</p>
+                    <p class="text-xs text-gray-500 italic">Sayang kamu orang yang pertama bisa buat aku gak pernah bosen akan hubungan ini</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">🦾</div>
+                    <p class="font-bold text-pink-700 text-lg mb-1">Dedikatif</p>
+                    <p class="text-xs text-gray-500 italic">Pekerja keras sampai saat ini aku sangat sangat bangga akan hal ini</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">🏡</div>
+                    <p class="font-bold text-pink-700 text-lg mb-1">Nyaman </p> 
+                    <p class="text-xs text-gray-500 italic">K⁠amu benar benar rumah yang nyaman untuk aku tempati sampai detik ini</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">😜</div>
+                    <p class="font-bold text-pink-700 text-lg mb-1">Ekspresif </p>
+                    <p class="text-xs text-gray-500 italic">⁠Tengil jujur aku suka segala hal yang kamu buat ejekan kamu, pujian kamu aku sangat sangat menyukainya</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">☁️</div>
+                    <p class="font-bold text-pink-700 text-lg mb-1">Lembut</p>
+                    <p class="text-xs text-gray-500 italic">sangat sabar dan lembut banget jujur setiap kamu marah aku selalu nangis tapi selalu minta maaf setelah itu.</p>
+                </div>
+                
+                <div class="reason-card">
+                    <div class="reason-icon">🫶</div> 
+                    <p class="font-bold text-pink-700 text-lg mb-1">Tulus</p>
+                    <p class="text-xs text-gray-500 italic">kamu mencintaiku dengan banyakan ya kekuranganku dan aku jatuh cinta akan hal itu</p>
+                </div>
+            </div>
+ 
+            <div class="flex space-x-4">
+                <button onclick="nextPage(5)" class="bg-white text-pink-500 border-2 border-pink-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
+                <button onclick="nextPage(7)" class="bg-pink-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 💌</button>
+            </div>
+        </div>
+
+        <!-- PAGE 7: FINAL PAGE -->
+        <div id="page7" class="page-container hidden-page">
+            <h2 class="font-big text-2xl mb-6">Special Gift!</h2>
+            
+            <div id="final-box" class="w-full max-w-xs p-6 bg-pink-50 rounded-2xl border-2 border-pink-200 shadow-xl">
+                <h3 class="font-bold text-pink-700 text-sm mb-3">Final Love Letter💌</h3>
+                <div class="bg-white p-4 rounded-xl border border-pink-100 text-left mb-6 h-28 overflow-y-auto">
+                    <p id="type-p7" class="text-xs text-gray-700 italic leading-relaxed"></p>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="nextPage(6)" class="text-pink-400 font-bold text-xs hover:underline">back</button>
+                    <button onclick="sealIt()" class="bg-pink-500 text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal It💌</button>
+                </div>
+            </div>
+
+            <div id="seal-loading" class="hidden flex flex-col items-center mt-8">
+                <div class="text-4xl animate-bounce">💌</div>
+                <p class="font-big text-xl text-pink-600">Sealing this with love</p>
+            </div>
+
+            <div id="final-sent" class="hidden w-full max-w-xs p-8 bg-pink-100 rounded-3xl border-4 border-white shadow-2xl flex flex-col items-center">
+                <div class="text-5xl mb-4">🩷</div>
+                <h2 class="font-big text-3xl text-pink-700 mb-1">Sent with Love</h2>
+                <p class="font-small text-pink-400 text-sm mb-6">Only For You</p>
+                <div class="flex space-x-1 text-xl mb-6">🩷🩷🩷🩷🩷🩷🩷</div>
+                <div class="text-center text-pink-800 space-y-1 mb-8"> 
+                    <p class="font-bold text-md">Sayangku cintaku duniaku</p>
+                    <p id="date-display" class="text-[10px] opacity-70"></p>
+                </div> 
+                <button onclick="location.reload()" class="bg-white text-pink-500 border-2 border-pink-500 px-8 py-2 rounded-full font-bold text-sm">see again✨</button>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- =============================
+         SCRIPTS: GABUNGAN
+         ============================= -->
+    <script>
+        /*********************************************
+         * SCRIPT 1: MATRIX (Index1) - PINK THEME
+         *********************************************/
+        const mCanvas = document.getElementById('matrixCanvas');
+        const mCtx = mCanvas.getContext('2d');
+        // USE GLOBAL AUDIO: Target id="bg-music"
+        const mAudio = document.getElementById('bg-music'); 
+        const mOverlay = document.getElementById('mOverlay');
+        const mStartBtn = document.getElementById('mStartBtn');
+        const mTransitionBtn = document.getElementById('transitionBtn');
+
+        let mParticles = [];
+        let mRippleParticles = []; 
+        let mDrops = []; 
+        let mSpeeds = []; 
+        let mGridChars = []; 
+        const mFontSize = 14; 
+        const mLoveLetters = "ILOVEYOU".split(""); 
+        let mColumns, mRows;
+        let mFrames = 0;
+        
+        let mState = "LOCKED"; 
+        let mSweepProgress = 0; 
+        let mIsExploding = false;
+        let mRainStarted = false; 
+        let mTextOpacity = 0; 
+
+        class MParticle {
+            constructor(targetX, targetY, type = "normal") {
+                const centerX = mCanvas.width / 2;
+                const centerY = mCanvas.height / 2;
+
+                if (type === "ripple") {
+                    const startScale = 0.75; 
+                    this.x = centerX + (targetX - centerX) * startScale;
+                    this.y = centerY + (targetY - centerY) * startScale;
+                    this.size = Math.random() * 2 + 2.5;
+                } else {
+                    this.x = Math.random() * mCanvas.width;
+                    this.y = Math.random() * mCanvas.height;
+                    this.size = Math.random() * 2 + 1.0;
+                }
+                
+                this.destX = targetX;
+                this.destY = targetY;
+                // CHANGE COLOR TO PINK (Ripple)
+                this.color = (type === "ripple") ? "255, 105, 180" : "255, 255, 255"; 
+                this.active = true;
+                this.opacity = (type === "ripple") ? 0 : 1.0;
+                this.type = type; 
+                this.progress = 0;
+                this.speed = 0.015 + Math.random() * 0.02; 
+                this.driftX = (Math.random() - 0.5) * 0.4;
+                this.driftY = (Math.random() - 0.5) * 0.4;
+                this.noiseOffset = Math.random() * 2000;
+                this.stayTime = 40; 
+                this.vx = 0;
+                this.vy = 0;
+            }
+
+            update() {
+                if (this.type === "ripple") {
+                    if (this.progress < 1) {
+                        this.progress += this.speed;
+                        const startScale = 0.75;
+                        const centerX = mCanvas.width / 2;
+                        const centerY = mCanvas.height / 2;
+                        const startX = centerX + (this.destX - centerX) * startScale;
+                        const startY = centerY + (this.destY - centerY) * startScale;
+                        this.x = startX + (this.destX - startX) * this.progress;
+                        this.y = startY + (this.destY - startY) * this.progress;
+                        this.opacity = Math.min(this.progress * 4, 1);
+                    } else {
+                        this.x = this.destX + Math.sin(mFrames * 0.1 + this.noiseOffset) * 0.8;
+                        this.y = this.destY + Math.cos(mFrames * 0.1 + this.noiseOffset) * 0.8;
+                        this.stayTime--;
+                        this.opacity = this.stayTime / 40;
+                        if (this.stayTime <= 0) this.active = false;
+                    }
+                } else if (mIsExploding) {
+                    if (this.vx === 0 && this.vy === 0) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const force = Math.random() * 15 + 12; 
+                        this.vx = Math.cos(angle) * force;
+                        this.vy = Math.sin(angle) * force;
+                    }
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vx *= 0.985;
+                    this.vy *= 0.985;
+                } else if (mState === "FINISHED" || mState === "FINAL_HEART") {
+                    if (this.opacity > 0.3) this.opacity -= 0.005;
+                    this.x += this.driftX + Math.sin(mFrames * 0.02 + this.noiseOffset) * 0.15;
+                    this.y += this.driftY + Math.cos(mFrames * 0.02 + this.noiseOffset) * 0.15;
+                    this.vx = 0; this.vy = 0;
+                } else {
+                    let dx = this.destX - this.x;
+                    let dy = this.destY - this.y;
+                    this.x += dx * 0.07;
+                    this.y += dy * 0.07;
+                    this.vx = 0; this.vy = 0;
+                }
+            }
+
+            draw() {
+                if (!this.active || this.opacity <= 0) return;
+                mCtx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                if (this.type === "ripple") {
+                    this.drawHeart(this.x, this.y, this.size * 2.8);
+                } else {
+                    mCtx.beginPath();
+                    mCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    mCtx.fill();
+                }
+            }
+
+            drawHeart(x, y, size) {
+                mCtx.beginPath();
+                mCtx.moveTo(x, y + size / 4);
+                mCtx.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + size / 4);
+                mCtx.bezierCurveTo(x - size / 2, y + size / 2, x, y + size * 0.75, x, y + size);
+                mCtx.bezierCurveTo(x, y + size * 0.75, x + size / 2, y + size / 2, x + size / 2, y + size / 4);
+                mCtx.bezierCurveTo(x + size / 2, y, x, y, x, y + size / 4);
+                mCtx.fill();
+            }
+        }
+
+        function mInitCanvas() {
+            mCanvas.width = window.innerWidth;
+            mCanvas.height = window.innerHeight;
+            mColumns = Math.ceil(mCanvas.width / mFontSize);
+            mRows = Math.ceil(mCanvas.height / mFontSize);
+            
+            mDrops = []; mSpeeds = []; mGridChars = [];
+            for (let i = 0; i < mColumns; i++) {
+                mDrops[i] = -Math.random() * 20; 
+                mSpeeds[i] = 0.1 + Math.random() * 0.3; 
+                mGridChars[i] = [];
+                for (let j = 0; j < mRows; j++) {
+                    mGridChars[i][j] = mLoveLetters[Math.floor(Math.random() * mLoveLetters.length)];
+                }
+            }
+        }
+
+        function getHeartOutlinePoints(count) {
+            const points = [];
+            const centerX = mCanvas.width / 2;
+            const centerY = mCanvas.height / 2;
+            const scale = Math.min(mCanvas.width, mCanvas.height) / 45;
+
+            for (let i = 0; i < count; i++) {
+                const t = (i / count) * Math.PI * 2;
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                points.push({
+                    x: centerX + x * scale,
+                    y: centerY + y * scale
+                });
+            }
+            return points;
+        }
+
+        function getTextPoints(text) {
+            const points = [];
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = mCanvas.width;
+            tempCanvas.height = mCanvas.height;
+            
+            // LOGIKA BARU: HANDLE ARRAY (MULTIPLE LINES)
+            if (Array.isArray(text)) {
+                // Cari line terpanjang untuk nentuin ukuran font agar muat
+                const maxLen = text.reduce((a, b) => a.length > b.length ? a : b, "").length;
+                // INCREASED FONT SIZE MULTIPLIER for better visibility
+                const tSize = Math.min(mCanvas.width / (maxLen * 0.5), 80); // Was 0.7 and 60
+                const lineHeight = tSize * 1.2; // Tighter line height
+                const totalHeight = (text.length - 1) * lineHeight;
+                const startY = (mCanvas.height / 2) - (totalHeight / 2);
+
+                tempCtx.font = `900 ${tSize}px "Arial", sans-serif`; // Use thick font weight 900
+                tempCtx.textAlign = 'center';
+                tempCtx.textBaseline = 'middle';
+                tempCtx.fillStyle = 'white';
+
+                text.forEach((line, i) => {
+                    tempCtx.fillText(line, mCanvas.width / 2, startY + (i * lineHeight));
+                });
+
+            } else {
+                // Single Line Logic (Yang Lama)
+                const isSingle = text.length === 1;
+                const tSize = isSingle ? Math.min(mCanvas.width / 2.2, 400) : Math.min(mCanvas.width / 3.5, 250);
+                tempCtx.font = `bold ${tSize}px Arial`;
+                tempCtx.textAlign = 'center';
+                tempCtx.textBaseline = 'middle';
+                tempCtx.fillStyle = 'white';
+                tempCtx.fillText(text, mCanvas.width / 2, mCanvas.height / 2);
+            }
+            
+            const data = tempCtx.getImageData(0, 0, mCanvas.width, mCanvas.height).data;
+            // INCREASE DENSITY: Change step from 10 to 4
+            for (let y = 0; y < mCanvas.height; y += 4) {
+                for (let x = 0; x < mCanvas.width; x += 4) {
+                    if (data[(y * mCanvas.width + x) * 4 + 3] > 128) points.push({ x, y });
+                }
+            }
+            return points;
+        }
+
+        function updateParticleTargets(text) {
+            const newPoints = getTextPoints(text);
+            for (let i = 0; i < Math.max(mParticles.length, newPoints.length); i++) {
+                if (i < newPoints.length) {
+                    if (i < mParticles.length) {
+                        mParticles[i].destX = newPoints[i].x;
+                        mParticles[i].destY = newPoints[i].y;
+                        mParticles[i].active = true;
+                    } else {
+                        mParticles.push(new MParticle(newPoints[i].x, newPoints[i].y));
+                    }
+                } else if (mParticles[i]) {
+                    mParticles[i].active = false;
+                }
+            }
+        }
+
+        async function startParticleSequence() {
+            mState = "SEQUENCE";
+
+            // 1. Halo Sayangku
+            updateParticleTargets(["Halo","Sayangku"]);
+            await new Promise(r => setTimeout(r, 2000));
+
+            // 2. Stevanus Hadi
+            updateParticleTargets(["Stevanus","Hadi"]);
+            await new Promise(r => setTimeout(r, 2000));
+ 
+            // 3. I really like your name and personality
+            // Biar ga kekecilan di HP, kita break jadi 2 baris
+            updateParticleTargets(["I really","like your"]);
+            await new Promise(r => setTimeout(r, 2000)); 
+
+            updateParticleTargets(["name and","personality"]);
+            await new Promise(r => setTimeout(r, 3500)); 
+
+            // Efek ledakan sebelum masuk ke "You Are My Love"
+            mIsExploding = true; 
+            await new Promise(r => setTimeout(r, 1000));  
+            mIsExploding = false;
+
+            const finalWords = ["You", "Are", "My", "Love"];
+            for (let word of finalWords) {
+                updateParticleTargets(word);
+                await new Promise(r => setTimeout(r, 1500));
+            }
+            mIsExploding = true; 
+            await new Promise(r => setTimeout(r, 800)); 
+            mIsExploding = false;
+            
+            mState = "FINAL_HEART";
+        }
+
+        function drawMatrix() {
+            mCtx.fillStyle = "rgba(0, 0, 0, 0.25)";
+            mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+            mCtx.font = mFontSize + "px monospace";
+            
+            if (mState === "SWEEP") {
+                mSweepProgress += 0.45;
+                if (mSweepProgress >= mRows * 0.7) mRainStarted = true;
+                if (mSweepProgress >= mRows + 15) {
+                    mState = "WAITING";
+                    startParticleSequence();
+                }
+                
+                const currentLimit = Math.floor(mSweepProgress);
+                for (let i = 0; i < mColumns; i++) {
+                    for (let j = 0; j <= currentLimit && j < mRows; j++) {
+                        const distFromEdge = currentLimit - j;
+                        if (distFromEdge < 15) {
+                            const op = 1 - (distFromEdge / 15);
+                            // PINK MATRIX COLOR
+                            mCtx.fillStyle = `rgba(255, 105, 180, ${op * 0.6})`;
+                            mCtx.fillText(mGridChars[i][j], i * mFontSize, j * mFontSize);
+                        }
+                    }
+                }
+            }
+            
+            if (mRainStarted) {
+                for (let i = 0; i < mColumns; i++) {
+                    mDrops[i] += mSpeeds[i];
+                    if (mDrops[i] > mRows && Math.random() > 0.985) mDrops[i] = 0;
+                    const currentRow = Math.floor(mDrops[i]);
+                    for (let j = 0; j < 10; j++) {
+                        const r = currentRow - j;
+                        if (r >= 0 && r < mRows) {
+                            // PINK RAIN TAIL
+                            mCtx.fillStyle = `rgba(255, 105, 180, ${0.2 * (1 - j/10)})`;
+                            mCtx.fillText(mGridChars[i][r], i * mFontSize, r * mFontSize);
+                        }
+                    }
+                }
+            }
+        }
+
+        function drawFinalText() {
+            if (mState === "FINAL_HEART") {
+                if (mTextOpacity < 1) mTextOpacity += 0.01;
+                
+                const centerX = mCanvas.width / 2;
+                const centerY = mCanvas.height / 2;
+                
+                mCtx.textAlign = 'center';
+                mCtx.textBaseline = 'middle';
+                mCtx.fillStyle = `rgba(255, 255, 255, ${mTextOpacity})`;
+                
+                // Baris 1
+                mCtx.font = `bold ${Math.min(mCanvas.width / 20, 38)}px "Comic Sans MS", cursive`;
+                mCtx.fillText("I LOVE YOU ❤️", centerX, centerY - 5);
+                
+                // Baris 2 
+                mCtx.font = `bold ${Math.min(mCanvas.width / 22, 30)}px "Comic Sans MS", cursive`;
+                mCtx.fillText("", centerX, centerY + 25);
+
+                // LOGIKA TRANSISI: MUNCULKAN TOMBOL
+                if (mTextOpacity >= 1) {
+                    mTransitionBtn.style.display = 'block';
+                }
+            }
+        }
+
+        function mDraw() {
+            if(document.getElementById('section-index1').style.display === 'none') return; // Stop drawing if hidden
+
+            drawMatrix();
+            if (mState !== "SWEEP" && mState !== "LOCKED") {
+                mParticles.forEach(p => { p.update(); p.draw(); });
+            }
+            if (mState === "FINAL_HEART") {
+                if (mFrames % 20 === 0) {
+                    const outline = getHeartOutlinePoints(150); 
+                    outline.forEach(pt => {
+                        mRippleParticles.push(new MParticle(pt.x, pt.y, "ripple"));
+                    });
+                }
+                for (let i = mRippleParticles.length - 1; i >= 0; i--) {
+                    mRippleParticles[i].update();
+                    if (!mRippleParticles[i].active) mRippleParticles.splice(i, 1);
+                    else mRippleParticles[i].draw();
+                }
+                drawFinalText();
+            }
+            mCtx.font = "12px Arial";
+            mCtx.fillStyle = "rgba(255, 255, 255, 0.3)"; 
+            mCtx.textAlign = "center"; 
+            mCtx.fillText("❤️", mCanvas.width - 60, mCanvas.height - 20);
+            mFrames++;
+            requestAnimationFrame(mDraw);
+        }
+
+        mStartBtn.addEventListener('click', () => {
+            mOverlay.style.opacity = '0';
+            mOverlay.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                mOverlay.style.display = 'none';
+                mState = "SWEEP";
+                mAudio.play().catch(e => console.log("Audio failed to play", e));
+            }, 1000);
+        });
+
+        // ==========================================
+        // FUNGSI TRANSISI KE INDEX 2 (DENGAN ANIMASI)
+        // ==========================================
+        function goToSection2() {
+            const curtain = document.getElementById('transition-curtain');
+            const loader = curtain.querySelector('.heart-loader');
+            
+            // 1. Fade In Curtain
+            curtain.style.opacity = '1';
+            curtain.style.pointerEvents = 'auto'; // Block clicks
+            loader.style.display = 'block';
+
+            // 2. Wait for fade in, then switch scenes
+            setTimeout(() => {
+                // Hide section 1
+                document.getElementById('section-index1').style.display = 'none';
+                
+                // Show section 2
+                document.getElementById('section-index2').style.display = 'block';
+                
+                // Trigger resize untuk sakura
+                sResize();
+
+                // 3. Fade Out Curtain after a brief pause
+                setTimeout(() => {
+                    curtain.style.opacity = '0';
+                    curtain.style.pointerEvents = 'none';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 1200); // Wait for transition to end
+                }, 1000); 
+
+            }, 1200); // Waktu tirai menutup sepenuhnya
+        }
+
+        // ==========================================
+        // INI PENTING: PANGGIL MInitCanvas() DI AWAL
+        // ==========================================
+        window.addEventListener('resize', mInitCanvas);
+        mInitCanvas();
+        mDraw();
+
+
+        /*********************************************
+         * SCRIPT 2: VALENTINE (Index2) - BLUE THEME
+         *********************************************/
+        const sCanvas = document.getElementById('sakura');
+        const sCtx = sCanvas.getContext('2d');
+        let sPetals = [];
+
+        function sResize() {
+            sCanvas.width = window.innerWidth;
+            sCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', sResize);
+        sResize();
+
+        class SPetal {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * sCanvas.width;
+                this.y = Math.random() * sCanvas.height - sCanvas.height;
+                this.size = Math.random() * 5 + 5;
+                this.speed = Math.random() * 1 + 0.5;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = Math.random() * 0.05 - 0.025;
+                this.horizontalSpeed = Math.random() * 1 - 0.5;
+                this.color = `rgba(${180 + Math.random() * 50}, ${220 + Math.random() * 35}, 255, ${0.6 + Math.random() * 0.4})`;
+            }
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.angle) * 0.5 + this.horizontalSpeed;
+                this.angle += this.spin;
+                if (this.y > sCanvas.height + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                sCtx.save();
+                sCtx.translate(this.x, this.y);
+                sCtx.rotate(this.angle);
+                sCtx.fillStyle = this.color;
+                sCtx.beginPath();
+                sCtx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+                sCtx.fill();
+                sCtx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+                sCtx.lineWidth = 1;
+                sCtx.beginPath();
+                sCtx.moveTo(-this.size, 0);
+                sCtx.lineTo(this.size, 0);
+                sCtx.stroke();
+                sCtx.restore();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) sPetals.push(new SPetal());
+
+        function animateSakura() {
+            // Hanya jalankan jika section 2 aktif agar hemat resource
+            if(document.getElementById('section-index2').style.display !== 'none') {
+                sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
+                sPetals.forEach(p => { p.update(); p.draw(); });
+            }
+            requestAnimationFrame(animateSakura);
+        }
+        animateSakura();
+
+        // USE GLOBAL AUDIO: Target id="bg-music"
+        const vAudio = document.getElementById('bg-music');
+        const defaultSong = 'https://birthdaysx.github.io/Musik/fly-moon.mp3'; // Not actually used for auto-start logic now
+ 
+        function initExperience() {
+            document.getElementById('page0').classList.add('hidden-page');
+            const p1 = document.getElementById('page1'); p1.classList.remove('hidden-page'); p1.classList.add('fade-in-page');
+            
+            // MUSIK TIDAK MERESET, LANJUT DARI MATRIX
+            // vAudio.src = defaultSong; <--- DELETE
+            // vAudio.play().catch(err => console.log("Audio play failed")); <--- DELETE
+
+            const loader = document.getElementById('loader');
+            let w = 0;
+            const t = setInterval(() => {
+                if (w >= 100) {
+                    clearInterval(t);
+                    setTimeout(() => nextPage(2), 500);
+                } else {
+                    w += 1;
+                    loader.style.width = w + '%';
+                }
+            }, 30);
+        }
+
+        function playSong(url, element) {
+            document.querySelectorAll('.cassette').forEach(c => c.classList.remove('playing'));
+            element.querySelector('.cassette').classList.add('playing');
+            
+            // JEDA DULU SEBELUM GANTI LAGU
+            vAudio.pause();
+            vAudio.src = url;
+            vAudio.play();
+        }
+
+        function nextPage(n) {
+            document.querySelectorAll('.page-container').forEach(p => {
+                p.classList.add('hidden-page');
+                p.classList.remove('fade-in-page'); 
+            });
+
+            const targetPage = document.getElementById('page' + n);
+            targetPage.classList.remove('hidden-page');
+            
+            void targetPage.offsetWidth; 
+            targetPage.classList.add('fade-in-page');
+
+            if (n === 7) {
+                startTypewriterP7();
+            }
+        }
+
+        function openEnvelope() {
+            document.getElementById('envelope-wrapper').classList.add('hidden');
+            document.getElementById('letter-opened').classList.remove('hidden');
+            
+            const txt = "Halo sayangku gimana hari ini sayang, makasih udah bekerja keras sejauh ini, aku bangga dengan semua pencapaian kamu";
+            const target = document.getElementById('type-p3');
+            target.innerHTML = ""; 
+            let i = 0;
+            
+            function type() {
+                if (i < txt.length) {
+                    // Logic BR otomatis
+                    if (txt.charAt(i) === '<') {
+                        let tagEnd = txt.indexOf('>', i);
+                        if (tagEnd !== -1) {
+                            target.innerHTML += txt.substring(i, tagEnd + 1);
+                            i = tagEnd + 1;
+                        }
+                    } else {
+                        target.innerHTML += txt.charAt(i);
+                        i++; 
+                    }
+                    setTimeout(type, 50);
+                } else {
+                    document.getElementById('btn-p3').classList.remove('hidden');
+                }
+            }
+            setTimeout(type, 500);
+        }
+
+        function startTypewriterP7() {
+            const txt = "Sayang cintaku duniaku<br>Terimakasih sudah hadir di hidup aku dan mewarnai hidupku dengan banyak hal yang kamu bawa, setiap hari aku selalu jatuh cinta dengan kamu sayang, aku tau banyak hal yang membuat kamu lelah akan sikap aku, aku lagi belajar lebih dewasa dari kemarin, jadi tolong bimbing aku yah jika ego aku lebih besar sayang, jujur kamu adalah laki laki yang sangat sangat berhak untuk aku perjuangkan, I love you more always and never end babe, sayang aku akan menunggu sampai kita bertemu ❤️";
+            const target = document.getElementById('type-p7');
+            target.innerHTML = ""; 
+            let i = 0;
+            
+            function type() {
+                if (i < txt.length) {
+                    // Logic BR otomatis
+                    if (txt.charAt(i) === '<') {
+                        let tagEnd = txt.indexOf('>', i);
+                        if (tagEnd !== -1) {
+                            target.innerHTML += txt.substring(i, tagEnd + 1);
+                            i = tagEnd + 1;
+                        }
+                    } else {
+                        target.innerHTML += txt.charAt(i);
+                        i++;
+                    }
+                    target.parentElement.scrollTop = target.parentElement.scrollHeight;
+                    setTimeout(type, 40);
+                }
+            }
+            setTimeout(type, 800);
+        }
+
+        function sealIt() {
+            document.getElementById('final-box').classList.add('hidden');
+            document.getElementById('seal-loading').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('seal-loading').classList.add('hidden');
+                document.getElementById('final-sent').classList.remove('hidden');
+                
+                const d = new Date();
+                const opt = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('date-display').innerText = d.toLocaleDateString('en-US', opt);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

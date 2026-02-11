@@ -547,8 +547,9 @@
             <div class="reason-card">
                 <div class="reason-icon">💖</div>
                 <p class="font-bold text-sky-700 text-lg mb-1">Penyabar</p>
-                <p class="text-xs text-gray-500 italic">Selalu jadi cowo penyabar, lemah lembut  dan pendengar yg baik buat aku yaa sayang, biar aku makin sayangg 😄🤗❤️‍🩹❤️‍🩹</p>
+                <p class="text-xs text-gray-500 italic">Selalu jadi cowo penyabar, lemah lembut dan pendengar yg baik buat aku yaa sayang, biar aku makin sayangg 😄🤗❤️‍🩹❤️‍🩹</p>
             </div>
+        </div>
  
         <div class="flex space-x-4">
             <button onclick="nextPage(5)" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
@@ -575,8 +576,8 @@
         <div id="seal-loading" class="hidden flex flex-col items-center mt-8">
             <div class="text-4xl animate-bounce">💌</div>
             <p class="font-big text-xl text-sky-600">Sealing this with love</p>
-        </div>
-
+        </div> 
+    
         <div id="final-sent" class="hidden w-full max-w-xs p-8 bg-sky-100 rounded-3xl border-4 border-white shadow-2xl flex flex-col items-center">
             <div class="text-5xl mb-4">💙</div>
             <h2 class="font-big text-3xl text-sky-700 mb-1">Sent with Love</h2>
@@ -709,20 +710,16 @@
              
             function type() { 
                 if (i < txt.length) { 
-                    // Cek apakah ada tag HTML (seperti <br>)
                     if (txt.charAt(i) === '<') {
                         let tagEnd = txt.indexOf('>', i);
                         if (tagEnd !== -1) {
-                            // Masukkan seluruh tag sekaligus (<br>)
                             target.innerHTML += txt.substring(i, tagEnd + 1);
                             i = tagEnd + 1; 
                         } 
                     } else {
-                        // Jika bukan tag, ketik satu per satu
                         target.innerHTML += txt.charAt(i);
                         i++;
                     }
-                    
                     setTimeout(type, 50);
                 } else {
                     document.getElementById('btn-p3').classList.remove('hidden');
@@ -750,7 +747,7 @@
                         i++;
                     }
                     target.parentElement.scrollTop = target.parentElement.scrollHeight;
-                    setTimeout(type, 20); // Sedikit lebih cepat
+                    setTimeout(type, 20);
                 }
             }
             setTimeout(type, 800);

@@ -429,7 +429,11 @@
 
     <!-- PAGE 2: WILL YOU BE MY VALENTINE -->
     <div id="page2" class="page-container hidden-page">
-        <div class="glass-card">
+        
+        <!-- STIKER DI LUAR KOTAK (ATAS) --> 
+        <img src="https://media.tenor.com/p-d4ZP1JM0UAAAAi/stitch.gif" class="w- h-32 -mb-2 drop-shadow-xl" alt="Cute Sticker">
+         
+        <div class="glass-card">   
             <p class="font-small text-sm mb-2 relative z-10 text-pink-500">Hai, Aku punya yang spesial untukmu</p>
             <h2 class="font-big text-2xl mb-6 relative z-10 text-sky-600">Will You Be My Valentine?</h2> 
             
@@ -597,10 +601,10 @@
             <div class="reason-card">
                 <div class="reason-icon">🌌</div>
                 <p class="font-bold text-sky-700 text-lg mb-1">Tujuan</p>
-                <p class="text-xs text-gray-500 italic">"aku melihat masa depan jika bersama mu seandainya tidak bersama mu hidup ku terasa hampa seperti ruang kosong ngk ada isi nya."</p>
+                <p class="text-xs text-gray-500 italic">"Sering banget aku katakan pada ayang, seng orang yang jago banget solving problem selain itu aku melihat masa depan jika bersama mu seandainya tidak bersama mu hidup ku terasa hampa seperti ruang kosong ngk ada isi nya."</p>
             </div>
         </div>
- 
+  
         <div class="flex space-x-4">
             <button onclick="nextPage(5)" class="btn-back">Back</button>
             <button onclick="nextPage(7)" class="btn-gradient px-10 py-3 rounded-full font-bold shadow-lg">Continue 💌</button>
@@ -611,13 +615,16 @@
     <div id="page7" class="page-container hidden-page">
         <h2 class="font-big text-2xl mb-6 text-sky-600">Happy Valentine's Day</h2>
         
+        <!-- STIKER DI LUAR KOTAK (ATAS) -->
+        <img src="https://media.tenor.com/T7u6L2lExRIAAAAi/stitch-love.gif" class="w-32 h-32 mb- drop-shadow-xl " alt="Final Sticker">
+
         <!-- Box diperbesar (max-w-sm) dan tinggi text area ditambah -->
-        <div id="final-box" class="w-full max-w-sm p-6 bg-white/90 rounded-2xl border-4 border-pink-200 shadow-xl">
+        <div id="final-box" class="w-full max-w-sm p-6 bg-white/90 rounded-2xl border-4 border-pink-200 shadow-xl relative">
             <h3 class="font-bold text-sky-700 text-sm mb-3">Final Love Letter💌</h3>
             <div class="bg-sky-50/50 p-4 rounded-xl border border-sky-100 text-left mb-6 h-56 overflow-y-auto">
                 <p id="type-p7" class="text-sm text-gray-700 italic leading-relaxed"></p>
             </div>
-
+ 
             <div class="flex justify-between items-center">
                 <button onclick="nextPage(6)" class="text-sky-400 font-bold text-xs hover:underline">back</button>
                 <button onclick="sealIt()" class="btn-gradient px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal It💌</button>

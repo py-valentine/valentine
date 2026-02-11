@@ -590,10 +590,10 @@
         <!-- BACKGROUND STICKERS (Hiasan) -->
         <img src="https://birthdaysx.github.io/Foto2/st8.png" class="bg-sticker" style="top: 5%; left: 5%; animation-delay: 0s;">
         <img src="https://birthdaysx.github.io/Foto2/st3.png" class="bg-sticker" style="top: 5%; right: 5%; animation-delay: 1s;">
-        <img src="https://birthdaysx.github.io/Foto2/st21.png" class="bg-sticker" style="bottom: 5%; left: 5%; animation-delay: 2s;">
-        <img src="https://birthdaysx.github.io/Foto2/st22.png" class="bg-sticker" style="bottom: 5%; right: 5%; animation-delay: 0.5s;">
+        <img src="https://birthdaysx.github.io/Foto2/st22.png" class="bg-sticker" style="bottom: 5%; left: 5%; animation-delay: 2s;">
+        <img src="https://birthdaysx.github.io/Foto2/st21.png" class="bg-sticker" style="bottom: 5%; right: 5%; animation-delay: 0.5s;">
         <img src="https://birthdaysx.github.io/Foto2/st23.png" class="bg-sticker" style="bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 1.5s;">
-
+ 
          
         <!-- PAGE 0: START --> 
         <div id="page0" class="page-container">
@@ -1075,16 +1075,16 @@
 
             // 1. Halo Sayangku
             updateParticleTargets(["Halo","Sayangku"]);
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 3500));
 
             // 2. Stevanus Hadi
             updateParticleTargets(["Stevanus","Hadi"]);
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 3500));
  
             // 3. I really like your name and personality
             // Biar ga kekecilan di HP, kita break jadi 2 baris
             updateParticleTargets(["I really","like your"]);
-            await new Promise(r => setTimeout(r, 2000)); 
+            await new Promise(r => setTimeout(r, 3500)); 
 
             updateParticleTargets(["name and","personality"]);
             await new Promise(r => setTimeout(r, 3500)); 
@@ -1097,9 +1097,9 @@
             const finalWords = ["You", "Are", "My", "Love"];
             for (let word of finalWords) {
                 updateParticleTargets(word);
-                await new Promise(r => setTimeout(r, 1500));
+                await new Promise(r => setTimeout(r, 2500));
             }
-            mIsExploding = true; 
+            mIsExploding = true;  
             await new Promise(r => setTimeout(r, 800)); 
             mIsExploding = false;
             

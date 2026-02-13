@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -379,24 +379,22 @@
     <canvas class="sakura-canvas" id="sakura"></canvas>
     <audio id="bg-music" loop></audio>
 
-    <!-- PAGE 0: START -->
     <div id="page0" class="page-container">
         <div class="glass-card">
             <img src="https://birthdaysx.github.io/Foto2/nai1.gif" alt="Sticker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
-            <h1 class="font-big text-xl mb-2 relative z-10">Something for you...</h1>
-            <p class="font-small text-lg mb-8 relative z-10">Click the button below to start your Valentine experience</p>
+            <h1 class="font-big text-xl mb-2 relative z-10">Ada sesuatu buat kamu...</h1>
+            <p class="font-small text-lg mb-8 relative z-10">Klik tombol di bawah buat mulai pengalaman Valentine kamu</p>
             <button onclick="initExperience()" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
-                Start ✨
+                Mulai ✨
             </button>
         </div>
     </div>
 
-    <!-- PAGE 1: LOADING -->
     <div id="page1" class="page-container hidden-page">
         <div class="glass-card">
             <img src="https://birthdaysx.github.io/Foto2/nai2.gif" alt="Sticker" class="w-32 h-32 rounded-lg mb-6 relative z-10">
-            <h1 class="font-big text-2xl mb-1 relative z-10">A Valentine Moment</h1>
-            <p class="font-small text-md mb-8 relative z-10">is being prepared for you...</p>
+            <h1 class="font-big text-2xl mb-1 relative z-10">Sebuah Momen Valentine</h1>
+            <p class="font-small text-md mb-8 relative z-10">lagi disiapin buat kamu...</p>
             
             <div class="loading-bar-container mb-4">
                 <div id="loader" class="loading-bar-fill"></div>
@@ -408,39 +406,37 @@
         </div>
     </div>
 
-    <!-- PAGE 2: WILL YOU BE MY VALENTINE -->
     <div id="page2" class="page-container hidden-page">
         <div class="glass-card">
-            <p class="font-small text-sm mb-2 relative z-10">Hi, I have something special for you</p>
+            <p class="font-small text-sm mb-2 relative z-10">Hai, aku punya sesuatu yang spesial</p>
             <h2 class="font-big text-2xl mb-6 relative z-10">Will You Be My Valentine?</h2>
             
             <div class="w-full p-4 bg-amber-600 rounded-2xl shadow-xl text-white relative mb-8 z-10">
-                <p class="text-sm italic">"A little reminder of how much more meaningful my life is with you in it."</p>
+                <p class="text-sm italic">"Sekedar pengingat betapa hidupku jadi lebih berwarna karena ada kamu."</p>
             </div>
 
             <div class="h-6 mb-8 relative z-10">
-                <p class="typewriter text-amber-800 font-semibold text-xs">Click below when you're ready✨</p>
+                <p class="typewriter text-amber-800 font-semibold text-xs">Klik di bawah kalau kamu udah siap✨</p>
             </div>
 
             <button onclick="nextPage(3)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg hover:scale-105 active:scale-95 transition w-full relative z-10">
-                Open This! 💛
+                Buka Ini! 💛
             </button>
         </div>
-    </div>
+    </div> 
 
-    <!-- PAGE 3: VALENTINE NOTE -->
-    <div id="page3" class="page-container hidden-page">
-        <p class="font-small text-xl mb-1">Because today feels just right</p>
-        <h2 class="font-big text-3xl mb-6">A Valentine Note 💛</h2> 
+    <div id="page3" class="page-container hidden-page"> 
+        <p class="font-small text-xl mb-1">Karena hari ini adalah hari yang spesial</p>
+        <h2 class="font-big text-3xl mb-6">Catatan Valentine 💛</h2> 
         
         <div class="w-full max-w-xs p-8 bg-amber-50 rounded-3xl border-4 border-amber-200 relative shadow-xl">
             <img src="https://birthdaysx.github.io/Foto2/nai3.gif" class="absolute -top-5 -right-5 w-16 h-16" alt="stiker">
             
             <div id="envelope-wrapper" class="flex flex-col items-center py-6">
                 <div class="envelope-emoji cursor-pointer hover:scale-110 transition-transform duration-300" onclick="openEnvelope()">📩</div>
-                <p class="text-amber-600 font-bold text-lg mb-3">Click the envelope!</p>
+                <p class="text-amber-600 font-bold text-lg mb-3">Klik amplopnya!</p>
                 <div class="bg-white/50 border-2 border-amber-300 px-6 py-2 rounded-full text-amber-600 font-bold text-sm shadow-sm">
-                    Special Message 💛
+                    Pesan Spesial 💛
                 </div>
             </div>
 
@@ -450,16 +446,15 @@
                     <p class="text-right mt-4 font-bold text-amber-500 text-xs italic">~ Pacar kamu yang ganteng</p>
                 </div>
                 <div class="flex flex-col space-y-2 w-full">
-                    <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-amber-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow">Continue 🎶</button>
+                    <button id="btn-p3" onclick="nextPage(4)" class="hidden bg-amber-500 text-white px-6 py-2 rounded-full font-bold text-sm shadow">Lanjut 🎶</button>
                 </div>
             </div>
         </div>
-        <button onclick="nextPage(2)" class="btn-back">Back</button>
+        <button onclick="nextPage(2)" class="btn-back">Kembali</button>
     </div>
-
-    <!-- PAGE 4: SONGS -->
+ 
     <div id="page4" class="page-container hidden-page">
-        <h2 class="font-big text-2xl mb-6">Songs that remind me of our memories</h2>
+        <h2 class="font-big text-2xl mb-6">Lagu yang ngingetin aku sama kamu</h2>
         
         <div id="cassette-list" class="w-full max-w-xs mb-8 h-[55vh] overflow-y-auto px-4 pt-4">
             
@@ -511,14 +506,13 @@
         </div>
 
         <div class="flex space-x-4">
-            <button onclick="nextPage(3)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
-            <button onclick="nextPage(5)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 📸</button>
+            <button onclick="nextPage(3)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
+            <button onclick="nextPage(5)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut 📸</button>
         </div>
     </div>
 
-    <!-- PAGE 5: GALLERY -->
     <div id="page5" class="page-container hidden-page">
-        <h2 class="font-big text-3xl mb-4">Our Memories</h2> 
+        <h2 class="font-big text-3xl mb-4">Indahnya Dirimu</h2> 
         <div class="photo-grid mb-6">
             <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/eee1.jpeg" alt="Memory 1"></div>
             <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/eee2.jpeg" alt="Memory 2"></div>
@@ -528,17 +522,16 @@
             <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/eee6.jpeg" alt="Memory 6"></div>
             <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/eee7.jpeg" alt="Memory 7"></div>
         </div>
-        <p class="italic text-xs text-amber-600 mb-4 px-10">"Scroll down to see all our moments."</p>
+        <p class="italic text-xs text-amber-600 mb-4 px-10">"Scroll ke bawah buat liat semua keindahanmu."</p>
         <div class="flex space-x-4">
-            <button onclick="nextPage(4)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
-            <button onclick="nextPage(6)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue ✨</button>
+            <button onclick="nextPage(4)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
+            <button onclick="nextPage(6)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut ✨</button>
         </div>
     </div>
 
-    <!-- PAGE 6: WHY YOU MATTER -->
-    <div id="page6" class="page-container hidden-page">
-        <h2 class="font-big text-3xl mb-1">WHY YOU MATTER</h2>
-        <p class="font-small text-lg italic mb-10">A glimpse of what makes you amazing</p>
+    <div id="page6" class="page-container hidden-page"> 
+        <h2 class="font-big text-3xl mb-1">KENAPA KAMU SPESIAL</h2>
+        <p class="font-small text-lg italic mb-10">Sedikit alasan kenapa kamu itu hebat</p>
 
         <div class="w-full max-w-sm space-y-8 mb-10 overflow-y-auto max-h-[50vh] px-6 py-4">
             <div class="reason-card">
@@ -552,26 +545,25 @@
                 <p class="font-bold text-amber-800 text-lg mb-1">Goddess of Taste</p>
                 <p class="text-xs text-gray-500 italic">"Selera kamu dalam memilih sesuatu bener” aku suka dan pasti terbaik."</p>
             </div>
-            
+             
             <div class="reason-card">
                 <div class="reason-icon">🤗</div>
-                <p class="font-bold text-amber-800 text-lg mb-1">My happines</p> 
-                <p class="text-xs text-gray-500 italic">"Kamu bikin aku bahagia dengan kerandoman kamu,you are my daily happines booster"</p>
+                <p class="font-bold text-amber-800 text-lg mb-1">My Happines</p> 
+                <p class="text-xs text-gray-500 italic">"Kamu bikin aku bahagia dengan kerandoman kamu, you are my daily happines booster"</p>
             </div>
             
             <div class="reason-card">
                 <div class="reason-icon">👸</div>
-                <p class="font-bold text-amber-800 text-lg mb-1">The Best Woman </p>
+                <p class="font-bold text-amber-800 text-lg mb-1">The Best Woman</p>
                 <p class="text-xs text-gray-500 italic">"You’re the best woman in my life."</p>
             </div>
           </div>  
         <div class="flex space-x-4">
-            <button onclick="nextPage(5)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
-            <button onclick="nextPage(7)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Continue 💌</button>
+            <button onclick="nextPage(5)" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-3 rounded-full font-bold shadow-lg">Kembali</button>
+            <button onclick="nextPage(7)" class="bg-amber-500 text-white px-10 py-3 rounded-full font-bold shadow-lg">Lanjut 💌</button>
         </div>
     </div>
  
-    <!-- PAGE 7: FINAL PAGE -->
     <div id="page7" class="page-container hidden-page">
         <h2 class="font-big text-2xl mb-6">Happy Valentine's Day</h2>
         
@@ -582,26 +574,26 @@
             </div>
 
             <div class="flex justify-between items-center">
-                <button onclick="nextPage(6)" class="text-amber-500 font-bold text-xs hover:underline">back</button>
-                <button onclick="sealIt()" class="bg-amber-500 text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal It 💌</button>
+                <button onclick="nextPage(6)" class="text-amber-500 font-bold text-xs hover:underline">kembali</button>
+                <button onclick="sealIt()" class="bg-amber-500 text-white px-6 py-2 rounded-full font-bold text-xs shadow-md">Seal it 💌</button>
             </div>
         </div>
 
         <div id="seal-loading" class="hidden flex flex-col items-center mt-8">
             <div class="text-4xl animate-bounce">💌</div>
-            <p class="font-big text-xl text-amber-600">Sealing this with love</p>
+            <p class="font-big text-xl text-amber-600">Sealing this with love...</p>
         </div>
 
         <div id="final-sent" class="hidden w-full max-w-xs p-8 bg-amber-100 rounded-3xl border-4 border-white shadow-2xl flex flex-col items-center">
             <div class="text-5xl mb-4">💛</div>
-            <h2 class="font-big text-3xl text-amber-800 mb-1">Sent with Love</h2>
+            <h2 class="font-big text-3xl text-amber-800 mb-1">Sent With Love</h2>
             <p class="font-small text-amber-600 text-sm mb-6">Only For You</p>
             <div class="flex space-x-1 text-xl mb-6">💛💛💛💛💛💛💛</div>
             <div class="text-center text-amber-900 space-y-1 mb-8">
                 <p class="font-bold text-md">~ Pacar kamu yang ganteng</p> 
                 <p id="date-display" class="text-[10px] opacity-70"></p>
             </div>
-            <button onclick="location.reload()" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-2 rounded-full font-bold text-sm">see again ✨</button>
+            <button onclick="location.reload()" class="bg-white text-amber-500 border-2 border-amber-500 px-8 py-2 rounded-full font-bold text-sm">liat lagi ✨</button>
         </div>
     </div>
 
@@ -718,7 +710,8 @@
             document.getElementById('envelope-wrapper').classList.add('hidden');
             document.getElementById('letter-opened').classList.remove('hidden');
             
-            const txt = "Hi! I just wanted to let you know how much I appreciate you. You are the best part of every day. Happy Valentine's Day!.";
+            // Text translated to Indonesian
+            const txt = "Hai! Aku cuma mau bilang betapa aku menghargai kamu. Kamu adalah bagian terbaik di setiap hariku. Happy Valentine's Day!";
             const target = document.getElementById('type-p3');
             target.innerHTML = ""; 
             let i = 0;
@@ -767,8 +760,9 @@
                 document.getElementById('final-sent').classList.remove('hidden');
                 
                 const d = new Date();
+                // Changed locale to Indonesia
                 const opt = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('date-display').innerText = d.toLocaleDateString('en-US', opt);
+                document.getElementById('date-display').innerText = d.toLocaleDateString('id-ID', opt);
             }, 3000);
         }
     </script>

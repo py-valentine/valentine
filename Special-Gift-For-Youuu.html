@@ -277,7 +277,7 @@
             <!-- Teks dikosongkan untuk diisi animasi mengetik -->
             <p id="typing-text"></p>
     <!-- PENGIRIM -->  
-            <p style="font-style: italic; margin-top: 15px;">Elisabeth Hulda Nanlohy</p>
+            <p style="font-style: italic; margin-top: 15px;">From Your Greatest Love: Elisabeth Hulda Nanlohy</p>
             <button class="restart-btn" onclick="location.reload()">Mulai Lagi</button>
         </div>
     </div>  
@@ -301,12 +301,12 @@
         let cinematicDone = false;
  
         // MESSAGE CARD
-        const messageToType = "“You are my first Valentine, and hopefully my last.”\n"+"Terima kasih untuk setiap senyum yang kamu beri..\n"+"untuk perhatian kecil yang selalu terasa besar…\n"+"untuk kesabaranmu memahami aku dan menerima segala kekuranganku.\n"+"Terima kasih sudah memilih untuk tetap setia, dan selalu memberi warna di hidup aku.\n"+"Sama kamu aku belajar bahwa cinta bukan hanya tentang rasa tapi tentang hadir, menguatkan, dan saling menjaga…\n"+"Sayang,, saat ini kita masih berproses dalam segala hal, tapi aku percaya selama kita bergandengan tangan dan berjalan bersama, kita akan tetap kuat sampai pada titik keberhasilan...\n"+"Aku tidak tahu apa yang akan terjadi di masa depan..\n"+"tapi hari ini satu hal yang ingin aku sampaikan “Aku bersyukur memilikimu dengan apa adanya kamu”…\n"+"I Love You Sayangku…..";
+        const messageToType = "“You are my first Valentine, and hopefully my last💞”\n"+"Terima kasih untuk setiap senyum yang kamu beri..🫶\n"+"untuk perhatian kecil yang selalu terasa besar…\n"+"untuk kesabaranmu memahami aku dan menerima segala kekuranganku.🥰\n"+"Terima kasih sudah memilih untuk tetap setia, dan selalu memberi warna di hidup aku.\n"+"Sama kamu aku belajar bahwa cinta bukan hanya tentang rasa tapi tentang hadir, menguatkan, dan saling menjaga…🤗🤍\n"+"Sayang,, saat ini kita masih berproses dalam segala hal, tapi aku percaya selama kita bergandengan tangan dan berjalan bersama, kita akan tetap kuat sampai pada titik keberhasilan...🤗💖\n"+"Aku tidak tahu apa yang akan terjadi di masa depan..\n"+"tapi hari ini satu hal yang ingin aku sampaikan “Aku bersyukur memilikimu dengan apa adanya kamu”…\n"+"I Love You Sayangku…..🥰❤️";
   
         // DAFTAR UCAPAN (WISHES) 
         const wishes = [["TUHAN YESUS","BERKATI KAMU",""], ["SEHAT SEHAT","TERUS YAA",""], ["TETAP","SEMANGAT",""], ["JANGAN LUPA","SENYUM SETIAP","HARI"],"BAHAGIA SELALU"]; 
         let wishIndex = 0; 
-  
+   
         function resize() {  
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -368,10 +368,10 @@
                 this.y = height;
                 this.targetX = targetX;   
                 this.targetY = targetY; 
-                this.isCinematic = isCinematic;
+                this.isCinematic = isCinematic; 
                 const angle = Math.atan2(targetY - this.y, targetX - this.x);
                 this.speed = isCinematic ? 0.01 : 2.5; 
-                this.acceleration = isCinematic ? 1.058  : 1.1; 
+                this.acceleration = isCinematic ? 1.045  : 1.1; 
                 this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
                 this.hue = isCinematic ? 340 : random(0, 360); // 340 warna pink-ish
                 this.color = isCinematic ? '#ff4d6d' : `hsl(${this.hue}, 100%, 70%)`;
